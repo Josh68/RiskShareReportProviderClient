@@ -30,12 +30,12 @@ module.exports = function(config) {
       'bower_components/spin.js/spin.js',
       'bower_components/angular-spinner/angular-spinner.js',
       'bower_components/angular-mocks/angular-mocks.js',
-      'app/core/riskshare.core.js',
-      'app/layout/riskshare.app.layout.js',
-      'app/reports/riskshare.app.reports.js',
-      'app/entities/riskshare.app.entities.js',     
-      'app/riskshare.js',
-      'app/**/*.js'
+      '../app/core/riskshare.core.js',
+      '../app/layout/riskshare.app.layout.js',
+      '../app/reports/riskshare.app.reports.js',
+      '../app/entities/riskshare.app.entities.js',
+      '../app/riskshare.js',
+      '../app/**/*.js'
     ],
 
 

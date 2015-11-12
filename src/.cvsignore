@@ -1,7 +1,0 @@
-node_modules
-bower_components
-main
-.tmp
-.sass-cache
-.git
-Gemfile.lock

@@ -1,0 +1,20 @@
+//custom SASS functions here
+
+//utility to strip any units, used in Gumby font-size mixin
+@function strip-units($number) {
+  @return $number / ($number * 0 + 1);
+}
+
+// Fonts in rems with px fallback
+
+@mixin font-size($size, $is-important: false) {
+  $size: if(unitless($size), $size, $size / 1px);
+
+  @if $is-important {
+    font-size: $size + px !important;
+    font-size: ($size / strip-units($base-font-size)) + rem !important;
+  } @else {
+    font-size: $size + px;
+    font-size: ($size / strip-units($base-font-size)) + rem;
+  }
+}

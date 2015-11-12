@@ -1,0 +1,79 @@
+.container-app-header {
+  @include clearfix;
+  .nav {
+    width: 100%;
+    * {
+      @include font-size($med);
+    }
+  }
+  .nav-items {
+    height: 1em;
+  }
+  .nav-item-link, .greeting {
+    line-height: inherit;
+    position: relative;
+    @include rem(padding, 0 10px);
+    @include rem(top, -3px);
+  }
+  .nav-item {
+    float: left;
+    height: 13/15 * 1em;
+    padding-bottom: 0;
+    &:first-child {
+      border: 0 none;
+      .nav-item-link {
+        padding-left: 0;
+      }
+    }
+  }
+}
+
+.container-navbar {
+  background-color: $navutil-bg;
+  position: relative;
+  @include border-bottom-left-radius(5px);
+  @include rem(min-height, 70px);
+}
+
+.nav-logged-in {
+  @include rem(margin-top, 10px);
+  .nav-items {
+    float: right;
+  }
+  .nav-item {
+    border-left: 1px solid $warm-brown;
+    * {
+      font-family: $omnes-med;
+    }
+  }
+}
+
+.nav-util {
+  position: absolute;
+  @include rem(bottom, 9px);
+  @include rem(left, 14px);
+  .nav-item {
+    border-left: 1px solid $modern-yellow;
+  }
+  .nav-item-link {
+    color: $white;
+    &:hover {
+      color: $modern-yellow;
+    }
+  }
+}
+
+.app-name {
+  background-color: $modern-yellow-light;
+  line-height: 1;
+  position: absolute;
+  right: 0;
+  top: 0;
+  @include border-bottom-left-radius(5px);
+  @include font-size($med);
+  @include rem(padding, 8px 12px 6px);
+  & * {
+    color: $modern-plum;
+    font-family: $omnes-med;
+  }
+}

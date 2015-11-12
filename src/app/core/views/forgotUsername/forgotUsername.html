@@ -1,0 +1,55 @@
+<div class="content-intro" data-ng-show="!forgotUsername.validationFinished">
+  <p>In order to retrieve your forgotten username, please provide the following information.</p>
+</div>
+
+<form novalidate data-ng-show="!forgotUsername.question" class="" ng-submit="forgotUsername.verifyUser()" name="forgotUsername.verifyUserForm" data-ng-bind-attrs="{id: forgotUsername.forgotUsernameFormId}">
+  <fieldset class="forms">
+    <ul class="profile-form form">
+      <li class="form-row">
+        <label class="column col1" for="firstName">First Name</label>
+        <input class="column col2 rs-input input-password ui-inputfield ui-inputtext" 
+        	id="security-firstName" 
+        	name="firstName" 
+        	type="text" 
+        	autocomplete="off" 
+        	required ng-model="forgotUsername.firstName" 
+        	maxlength="60"
+        	placeholder="Required" />
+      	<div class="column col3"></div>
+      </li>
+      <li class="form-row">
+        <label class="column col1" for="lastName">Last Name</label>
+        <input class="column col2 rs-input input-password ui-inputfield ui-inputtext" 
+        	id="security-lastName" 
+        	name="lastName" 
+        	type="text" 
+        	autocomplete="off" 
+        	required ng-model="forgotUsername.lastName" 
+        	maxlength="30" 
+        	placeholder="Required" />
+      	<div class="column col3"></div>
+      </li>
+      <li class="form-row">
+        <label class="column col1" for="email">Email address</label>
+        <input class="column col2 rs-input input-password ui-inputfield ui-inputtext" 
+        	id="security-email" 
+        	name="email" 
+        	type="email" 
+        	autocomplete="off" 
+        	required 
+        	ng-model="forgotUsername.email" 
+        	maxlength="60" 
+        	placeholder="Required"/>
+      	<duv class="column col3"></div>
+      </li>
+      <li class="form-row">
+        <label class="column col1"></label>
+        <input type="submit"
+        	class="column col2 button button-submit data-ng-class:{ 'disabled': forgotUsername.verifyUserForm.$invalid || forgotUsername.verifyUserForm.$pristine}" 
+        	data-ng-disabled="forgotUsername.verifyUserForm.formSubmitted || forgotUsername.verifyUserForm.$invalid || forgotUsername.verifyUserForm.$pristine"
+        	ng-class="{'disabled': forgotUserName.formSubmitted === true}" 
+        	value="{{forgotUserName.formSubmitted ? 'Please wait...' : 'Submit'}}" />
+      </li>
+    </ul>
+  </fieldset>
+</form>

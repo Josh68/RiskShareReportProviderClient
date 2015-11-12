@@ -1,0 +1,56 @@
+<p class="navigate navigate-back" data-ng-if="rsApp.showReturnToSearch()"><a href="" bindonce class="return-to-search" data-ng-click="hsManage.returnToSearch()" data-bo-text="rsApp.returnToSearch"></a></p>
+
+<p class="required-message">Required fields are marked with</p>
+
+<form watch-form novalidate id="manage-hs-form" name="hsManage.manageHsForm" data-ng-submit="hsManage.formSubmitted || hsManage.showCreate ? hsManage.create() : hsManage.update()">
+  <ul class="form-columns">
+    <li class="row" data-ng-class="{ 'show-invalid': hsManage.hsFormData.showInvalid, 'show-required': hsManage.hsFormData.showRequired, 'hide-errors': hsManage.hsFormData.hideErrors($event) };" >
+      <label for="hs-name-input" class="required column col1">Health system name</label>
+      <div class="column col2" 
+      		data-type-ahead 
+      		data-no-select
+          data-is-required="true" 
+      		data-min-chars="3" 
+      		data-input-id="hs-name-input"
+      		data-input-name="hsNameInput"
+      		data-items="hsManage.healthsystems.list" 
+      		data-prompt="Begin typing a health system name" 
+      		data-title="name" data-subtitle="id" 
+          data-suppress-subtitle
+          data-ignore-case
+      		data-output="hsManage.healthsystems.selected.name" 
+      		data-model="hsManage.healthsystems.selected"
+          data-on-blur="hsManage.hsFormData.checkValidity()">
+    	</div>
+  		<div class="errors column col3">
+  		  <span class="presubmit-error invalid">The name has to be unique.</span>
+        <span class="presubmit-error required">This field is required.</span>
+  		</div>
+    </li>
+
+    <li class="row" data-ng-if="!hsManage.showCreate && hsManage.healthsystems.selected.pres.length > 0">
+      <label class="required column col1" data-ng-class="{ 'label-list' : hsManage.healthsystems.selected.pres.length > 1 }">
+Provider entities</label>
+      <ul>
+        <li data-ng-repeat="pre in hsManage.healthsystems.selected.pres">
+          <a href="" data-ng-bind="pre.name" data-ng-click="hsManage.editPre(pre.id)"></a>
+        </li>
+      </ul>
+    </li>
+    <li class="row" data-ng-class="{ 'row-multiple' : hsManage.healthsystems.selected.pres.length > 1 }" data-ng-if="!hsManage.showCreate">
+      <span class="column col1"></span>
+      <pretty-checkbox class="column col2" data-ng-disabled="hsManage.healthsystems.selected.pres.length > 0" name="deactivateHs" data-ng-model="hsManage.healthsystems.selected.deactivate" value="" label="false">
+        <label ng-show="!hsManage.healthsystems.selected.deactivate"> Deactivate health system</label>
+        <label ng-show="hsManage.healthsystems.selected.deactivate"> Activate health system</label>
+      </pretty-checkbox>
+    </li>
+
+    <li class="row">
+      <span class="column col1"></span>
+      <input class="column col2 button button-submit data-ng-class:{ 'disabled': hsManage.manageHsForm.$invalid || hsManage.manageHsForm.$pristine }" 
+      		type="submit" 
+      		value="{{hsManage.showCreate ? 'Create health system' : 'Update health system'}}" 
+      		data-ng-disabled="hsManage.manageHsForm.$invalid || hsManage.manageHsForm.$pristine" />
+    </li>
+  </ul>
+</form>

@@ -1,0 +1,13 @@
+// Your custom state SCSS should be written here...
+
+.hidden {
+  display: none;
+}
+
+.hidden.active, .show {
+  display: block;
+}
+
+.invisible {
+  visibility: hidden;
+}

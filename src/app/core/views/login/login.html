@@ -1,0 +1,23 @@
+<form novalidate class="form-login" data-ng-submit="login.login()">
+  <h2 class="heading" data-ng-bind="pageTitle" data-ng-hide="isLoggedIn"></h2>
+  <ul class="forms">
+    <li>
+      <input type="text" class="rs-input input-text" id="username" name="username" autocomplete="off" data-ng-model="login.username" />
+      <label for="username">Username</label>
+    </li>
+    <li>
+      <div class="input-with-button">
+        <input class="rs-input input-password" type="password" id="password" name="password" autocomplete="off" data-ng-model="login.password" />
+        <input class="rs-input input-button" type="submit" value="go!" data-ng-disabled="login.formSubmitted" ng-class="{'disabled': login.formSubmitted === true}" />
+      </div>
+      <label for="password">Password</label>
+    </li>
+  </ul>
+  
+  <div data-bindonce data-ng-repeat="item in login.forgotLinks">
+      <a data-bo-href="item.path" data-ng-click="item.action()" data-bo-text="item.title"></a>
+  </div>
+  <p/>
+
+  <p>If you are having problems logging in, please contact us at 855-226-2257.</p>
+</form>

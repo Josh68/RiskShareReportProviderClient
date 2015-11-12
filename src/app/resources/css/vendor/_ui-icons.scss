@@ -1,0 +1,39 @@
+.ui-icon {
+  display: block;
+  text-indent: -99999px;
+  overflow: hidden;
+  background-repeat: no-repeat;
+}
+
+.ui-icon-closethick {
+  background-position: -96px -128px;
+  background-image: url(../images/ui-icons_ffffff_256x240.png);
+  width: 17px;
+  height: 17px;
+  @include border-radius(10px);
+  background-color: #e1dfde;
+  &:hover, &:active {
+    background-color: $warm-brown-light;
+    cursor: pointer;
+  }
+}
+
+.ui-clear {
+  background-color: #fff;
+}
+
+.ui-clearinput {
+  padding: 4px;
+  position: absolute;
+  right: -8px;
+  top: 3px;  
+}
+
+.ui-clearrow {
+  display: inline-block;
+  margin-right: 6px;
+  padding: 1px;
+  position: relative;
+  top: 3px;
+  @include border-radius(10px);
+}

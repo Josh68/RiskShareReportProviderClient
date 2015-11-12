@@ -1,0 +1,136 @@
+<p>Thank you for partnering with us. We&#8217;re excited to connect you with important information that can lower risks for your patients, and your practice.</p>
+
+<p>Questions? We're here to help. Call toll-free at 855-226-2257 or email <a href="mailto:riskrptquestions@modahealth.com">riskrptquestions@modahealth.com</a>.</p>
+
+<p>Enter your search criteria to view clinical and financial risk reports:</p>
+
+
+<form novalidate submit-handler data-ng-model="rptView.submitBinding" class="form-reports form-reports-viewing">
+
+  <fieldset>
+    <ul class="form-columns reports-view-filters">
+
+      <li class="row two-col">
+          <div class="column col1">
+            <label for="pre-select" class="required">Reports for:</label>
+            <ui-select id="pre-select" data-ng-model="rptView.pre.selected" theme="select2" search-enabled="false" data-ng-disabled="disabled" class="pre-list">
+              <ui-select-match placeholder="--{{rptView.presPlaceholder}}--">{{$select.selected.name}}</ui-select-match>
+              <ui-select-choices repeat="item in rptView.availablePres | filter: $select.search">
+                  <div data-ng-bind-html="item.name | highlight: $select.search"></div>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+          <div class="column col2">&nbsp;</div>
+      </li>
+
+      <!-- <li>
+        <fieldset>
+          <legend>Report type</legend>
+          <pretty-checkbox data-ng-disabled="!rptView.reportType.hasType.clinical" data-ng-model="rptView.reportType.setType.clinical" label="false"><label>Clinical</label></pretty-checkbox>
+          <pretty-checkbox data-ng-disabled="!rptView.reportType.hasType.financial" data-ng-model="rptView.reportType.setType.financial" label="false"><label>Financial</label></pretty-checkbox>
+        </fieldset>
+      </li>
+
+      <li>
+        <fieldset>
+          <legend>Report type</legend>
+          <pretty-radio disabled="!rptView.reportType.hasType.clinical" data-ng-model="rptView.reportType.testRadioType" value="'clinical'" label="false"><label>Clinical</label></pretty-radio>
+          <pretty-radio disabled="!rptView.reportType.hasType.financial" data-ng-model="rptView.reportType.testRadioType" value="'financial'" label="false"><label>Financial</label></pretty-radio>
+        </fieldset>
+      </li>
+    -->
+
+      <li class="row two-col">
+          <div class="column col1">
+            <label for="report-name-select">Report name:</label>
+            <ui-select id="report-name-select" data-ng-model="rptView.report.selected" data-ng-disabled="rptView.preNotSelected || (rptView.noAvailableReports && !rptView.preNotSelected)" theme="select2" search-enabled="false" class="report-list">
+              <ui-select-match placeholder="--{{rptView.reportsPlaceholder.name}}--">{{$select.selected.name}}</ui-select-match>
+              <ui-select-choices repeat="item in rptView.selectableReports | filter: $select.search">
+                  <div data-ng-bind-html="item.name | highlight: $select.search" data-ng-bind-value="item.code"></div>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+          <div class="column col2"></div>
+      </li>
+
+      <li class="row two-col date-row-container">
+          <div class="column col1">
+            <label>Report dates:</label>
+            <ui-select id="date-from-select" data-ng-model="rptView.date.from" theme="select2" search-enabled="false" data-ng-disabled="rptView.preNotSelected || (rptView.noAvailableReports && !rptView.preNotSelected)" class="date-from-menu">
+              <ui-select-match placeholder="{{rptView.dateRange.initialDate  | reportsMgmtDateFormat}}">{{$select.selected  | reportsMgmtDateFormat}}</ui-select-match>
+              <ui-select-choices repeat="item in rptView.dateRange.fromDates | filter: $select.search">
+                  <div data-ng-bind-html="item | reportsMgmtDateFormat | highlight: $select.search" data-ng-bind-value="item"></div>
+              </ui-select-choices>
+            </ui-select>
+
+            <label class="inner-date">to</label>
+
+            <ui-select id="date-to-select" data-ng-model="rptView.date.to" theme="select2" search-enabled="false" data-ng-disabled="rptView.preNotSelected || (rptView.noAvailableReports && !rptView.preNotSelected)" class="date-to-menu">
+              <ui-select-match placeholder="{{rptView.dateRange.initialDate | reportsMgmtDateFormat}}">{{$select.selected | reportsMgmtDateFormat}}</ui-select-match>
+              <ui-select-choices repeat="item in rptView.dateRange.toDates | filter: $select.search">
+                  <div data-ng-bind-html="item | reportsMgmtDateFormat | highlight: $select.search" data-ng-bind-value="item"></div>
+              </ui-select-choices>
+            </ui-select>
+
+          </div>
+          <div class="column col2"></div>
+      </li>
+
+      <li class="row two-col">
+          <div class="column col1">
+            <label></label>
+            <input class="button button-submit data-ng-class:{'disabled': rptView.preNotSelected || (rptView.noAvailableReports && !rptView.preNotSelected)}" type="submit" value="View reports" data-ng-disabled="rptView.preNotSelected || (rptView.noAvailableReports && !rptView.preNotSelected)">
+          </div>
+          <div class="column col2"></div>
+      </li>
+
+    </ul>
+  </fieldset>
+</form>
+
+<div id="infoMessages" class="ui-messages ui-messages-info ui-widget" role="status" aria-live="polite" data-ng-show="rptView.noAvailableReports && !rptView.preNotSelected">
+  <div class="ui-messages-info-content ui-corner-all">
+    <span class="ui-messages-icon ui-messages-icon-info"></span>
+    <ul class="ui-messages-list ui-messages-list-info">
+      <li class="ui-messages-item ui-messages-item-info">
+        <span class="ui-messages-detail ui-messages-detail-info">Sorry, no reports are available for the selected provider for the past 18 months.</span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div id="infoMessages" class="ui-messages ui-messages-info ui-widget" role="status" aria-live="polite" data-ng-show="rptView.showNoResults">
+  <div class="ui-messages-info-content ui-corner-all">
+    <span class="ui-messages-icon ui-messages-icon-info"></span>
+    <ul class="ui-messages-list ui-messages-list-info">
+      <li class="ui-messages-item ui-messages-item-info">
+        <span class="ui-messages-detail ui-messages-detail-info">Sorry, no reports were found.</span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<table data-ng-show="!rptView.preNotSelected && rptView.viewResultsTable" class="reports-list">
+  <caption>{{rptView.pre.selected.name}} - Reports</caption>
+  <!-- <thead>
+    <tr>
+      <th>Date</th>
+      <th>Name</th>
+      <th>Download</th>
+    </tr>
+  </thead> -->
+  <!--<tfoot><tr><td></td></tr></tfoot>-->
+  <tbody>
+    <tr data-ng-repeat="item in rptView.availableReports">
+      <td data-ng-bind="item.filteredDate" class="with-date nowrap">
+      </td>
+      <td data-ng-bind="item.name">
+      </td>
+      <td class="with-link nowrap">
+        <!--<a data-ng-href="{{item.downloadUrl}}" class="with-icon ng-class:{'pdf': item.pdf, 'xls': item.xls}" data-ng-click="rptView.reauth(item.reauthUrl, item.downloadUrl)">Report</a>-->
+        <!-- do not know report types at this time -->
+        <a data-ng-href="{{item.downloadUrl}}{{rsApp.token}}" data-ng-click="rsApp.reauth()" target="_blank">Report</a>
+      </td>
+    </tr>
+  </tbody>
+</table>

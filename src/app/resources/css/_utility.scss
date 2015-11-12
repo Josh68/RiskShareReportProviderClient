@@ -1,0 +1,23 @@
+//utility or helper classes, etc
+
+.none {
+  display: none !important;
+}
+
+.hide {
+  visibility: hidden !important;
+}
+
+//for Angular ng-cloak
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+/*
+.pdf {
+    padding-right: 18px;
+    width: auto;
+    background: url(../images/pdf.gif) no-repeat right;
+} */
+.nowrap {
+  white-space: nowrap !important;
+}

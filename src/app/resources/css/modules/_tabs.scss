@@ -1,0 +1,80 @@
+//all tabs styles in here
+
+.tabs-tab-body, .tabs-tab-container {
+  border: 1px solid $tab-borders;
+  border-top: 0 none;
+}
+
+.tabs-tab-container { //what holds all the tabs (the actual tabs, not the content) - a ul
+  border-bottom: 0 none;
+  border-left: 0 none;
+  border-right: 0 none;
+  margin-bottom: 0 !important;
+  //@include rem(padding-left, 20px);
+  position: relative;
+  //@include clearfix;
+  &:after {
+    position: absolute;
+    content: "";
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    border-bottom: 1px solid $table-borders;
+    z-index: 1;
+  }
+  &:before {
+    z-index: 1;
+  }
+}
+
+.tabs-tab { //the actual tab (li)
+  border: 1px solid $tab-background-unselected;
+  //border-left: 0 none;
+  @include border-top-left-radius(3px);
+  @include border-top-right-radius(3px);
+  background: $tab-background-unselected;
+  margin-right: 1px;
+  //border-bottom-width: 0;
+  display: inline-block;
+  padding: 0 1em;
+  position: relative;
+  span {
+        font-family: $omnes-med;
+      }
+  z-index: 0;
+  &.selected {
+    z-index: 2;
+    border: 1px solid $tab-borders;
+    border-bottom-color: $white;
+    background: $white;
+  }
+  &:first-child {
+    //border-left: 1px solid $table-borders;
+    //margin-left: 0;
+  }
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.tabs-tab-header, .tabs-tab-body {
+  @include rem(padding, 10px 5px);
+}
+
+.tabs-tab-header { //the span inside the tab with the label
+  display: block;
+}
+
+.tabs-tab-content-area { //the (useless) tranclude div that wraps the body of the content/content-header
+
+}
+
+.tabs-tab-body { //the div that contains the content div and any other stuff, like a content header, etc
+
+}
+
+.tabs-tab-content { //the main portion of the tab body
+  table {
+    width: 100%;
+  }
+}

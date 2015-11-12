@@ -1,0 +1,18 @@
+// Your custom mixin SCSS should be written here...
+// I am also including bases for @extends here (placeholders or ref classes), because I don't want to create another file just yet
+
+%phone-nums { //a placeholder for an extends
+  white-space: nowrap;
+}
+
+//for palette tiles
+@mixin palette-tile($bg-color) {
+    border: 0 solid $bg-color;
+    //background: linear-gradient($bg-color, $bg-color 50%, #fff 50%, #fff 100%);
+    background-color: $bg-color;
+}
+
+@mixin background-opacity($color, $opacity: 0.3) {
+    background: $color; /* The Fallback */
+    background: rgba($color, $opacity);
+}

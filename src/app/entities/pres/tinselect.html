@@ -1,0 +1,6 @@
+<ui-select id="tin-group-select" name="tinGroupSelect" data-ng-model="preManage.tins.selected" data-ng-required="showCreate ? 'true' : false" theme="select2" search-enabled="true" data-on-select="preManage.tins.onItemSelected($item, $model)">
+  <ui-select-match placeholder="{{preManage.tins.placeholder}}"><span data-ng-class="{ 'select2-default': !preManage.tins.selected || (!preManage.tins.selected.name && !preManage.tins.selected.tin) };">{{$select.selected.name && $select.selected.tin ? $select.selected.name + ' - ' + $select.selected.tin : $select.selected.name && !$select.selected.tin ? $select.selected.name : !$select.selected.name && !$select.selected.tin ? preManage.tins.placeholder : $select.selected.tin}}</span></ui-select-match>
+  <ui-select-choices repeat="tin in preManage.tins.list | filter: $select.search" ui-disable-choice="!tin.active || tin.nextEffDate === ''" refresh="preManage.onTinTypeAhead($select.search)" refreshDelay="0">
+    <div data-ng-bind-html="tin.name ? tin.tin + ' - ' + tin.name : tin.tin | highlight: $select.search"></div>
+  </ui-select-choices>
+</ui-select>

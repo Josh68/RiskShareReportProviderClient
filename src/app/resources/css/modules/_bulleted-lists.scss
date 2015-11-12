@@ -1,0 +1,81 @@
+/* ==========================================================================
+  Custom bulleted lists
+   ========================================================================== */
+   //much of this is lifted and bastardized from old stuff on other sites. do not lift for any kind of standard/style guide (!!!, and here it is in a style guide!)
+
+	ul, ol {
+      //@include rem(margin, 0 0 0.75em 2em);
+      padding: 0;
+      &.nav, .nav &, pre &, code & { //overrides for navs and code blocks
+        margin: 0;
+      }
+    }
+
+    li {
+
+
+
+    }
+
+	.bulleted-list {
+        @include rem(margin-left, 2 * $base-font-size);
+		& > li {
+			//@include rem(padding-left, $base-font-size); //believe this is not necessary with use of pseudo-element to contain the bullet-arrow
+      width: 85%; //Might reconsider this declaration
+      &:before {
+          @include rem(background-size, 7px 10px);
+          @include rem(height, 10px);
+          @include rem(margin-left, -$base-font-size);
+          @include rem(margin-right, $base-font-size/2);
+          @include rem(width, 7px);
+          background-image: url("../images/bullet_arrow@2x.png"); //my android can't handle data-svg or data-png and background positioning/size (correctly)
+          background-position: 0 50%;
+          background-repeat: no-repeat;
+          content: "";
+          display: inline-block;
+      }
+		}
+	}
+
+  .no-backgroundsize { //targeting IE8
+    .bulleted-list {
+      & > li {
+        &:before {
+          background-image: url("../images/bullet_arrow.gif"); //my android can't handle data-svg or data-png and background positioning/size (correctly)
+        }
+      }
+    }
+  }
+
+
+// .lt-ie9 {
+// 	.bulleted-list {
+//    &:before {
+//      background-image: url('../images/bullet_arrow.png');
+//    }
+// 	}
+// }
+
+  //Need to use specific and methodical classes (aim for SMACCS-style) to target styles - this is too, too general, and is throwing off layout elsewhere
+
+  //#content ul {
+    //li {
+      //list-style-image: url('../images/bullet_arrow.gif');
+      //list-style-position: outside;
+      //width: 85%;
+      //margin-bottom: 0.2%;
+    //}
+  //}
+  //#content ul, #content ol {
+    //padding: 0;
+    //margin: 0 0 0.75em 2em
+  //}
+
+  #content form {
+    ul {
+      margin: 0;
+       li {
+        list-style: none;
+       }
+    }
+  }

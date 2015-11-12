@@ -1,0 +1,39 @@
+//all styles for a type-ahead (autosuggest) input/combo here
+
+.type-ahead-selectable {
+  .type-ahead-item {
+    cursor: pointer;
+    &.active {
+      background-color: $dropdown-hover;
+      color: #fff;
+      > * {
+        color: #fff;
+      }
+    }
+  }
+}
+
+.type-ahead-list {
+  background-color: #fff;
+  border: 1px solid $button-box-border;
+  //box-sizing: content-box;
+  @include rem(padding, 4px 4px 4px 0.5em);
+  position: absolute;
+  z-index: 3;
+  @include border-radius(4px);
+  &.empty {
+    display: none;
+  }
+}
+
+.type-ahead-input,
+.type-ahead-list {
+  width: 100%;
+}
+
+[data-type-ahead],
+[type-ahead],
+.data-type-ahead,
+.type-ahead {
+  position: relative;
+}

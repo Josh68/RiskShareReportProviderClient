@@ -1,0 +1,24 @@
+<h2 class="heading" ng-bind="pageTitle" data-ng-hide="isLoggedIn"></h2>
+
+<p data-ng-show="!rsApp.secQAIsSet">Now enter a security question and answer. You&#8217;ll be asked to answer this question before resetting your password:</p>
+
+<p data-ng-show="rsApp.secQAIsSet">Answer your security questions to reset your password. </p>
+
+<form novalidate class="" data-ng-submit="security.changeQuestion()" name="changeQuestionForm" data-ng-bind-attrs="{id: security.securityFormId}">
+  <fieldset class="forms">
+    <ul class="profile-form form">
+      <li class="form-row">
+        <label class="column col1" for="question">Question</label>
+        <input class="column col2 rs-input input-password ui-inputfield ui-inputtext" id="security-question" name="question" type="text" autocomplete="off" data-ng-required="true" data-ng-model="security.question" maxlength="50" placeholder="Required" />
+      </li>
+      <li class="form-row">
+        <label class="column col1" for="answer">Answer</label>
+        <input class="column col2 rs-input input-password ui-inputfield ui-inputtext" id="security-answer" name="answer" type="text" autocomplete="off" data-ng-required="true" data-ng-model="security.answer" maxlength="50" placeholder="Required" />
+      </li>
+      <li class="form-row">
+        <label class="column col1"></label>
+        <input class="column col2 button button-submit" type="submit" data-ng-disabled="security.disableSubmit()" data-ng-class="{ 'disabled': security.disabledSubmitBool }" value="{{security.formSubmitted ? 'Please wait...' : 'Submit'}}" />
+      </li>
+    </ul>
+  </fieldset>
+</form>

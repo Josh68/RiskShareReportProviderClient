@@ -1,0 +1,106 @@
+<p>Select reports to publish, retract, or reject.</p>
+
+<form novalidate submit-handler data-ng-model="rptAdmin.searchBinding" class="form-reports form-reports-management">
+    <ul class="form-columns label-above reports-management-filters">
+      <li class="row four-col">
+          <div class="column col1">
+            <label for="report-select" class="required">Report</label>
+            <ui-select id="report-select" data-ng-model="rptAdmin.report.selected" theme="select2" search-enabled="false" class="pre-list" title="Select a report">
+              <ui-select-match placeholder="--Select--">{{$select.selected.name}}</ui-select-match>
+              <ui-select-choices group-by="'type'" repeat="item in rptAdmin.availableReports | filter: $select.search">
+                  <div data-ng-bind-html="item.name | highlight: $select.search"></div>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+          <div class="column col2">
+            <label for="date-from-select">From</label>
+            <ui-select id="date-from-select" data-ng-model="rptAdmin.date.from" theme="select2" search-enabled="false" data-ng-disabled="rptAdmin.reportNotSelected" title="Date from">
+              <ui-select-match placeholder="{{rptAdmin.dateRange.initialDate | reportsMgmtDateFormat}}">{{$select.selected | reportsMgmtDateFormat}}</ui-select-match>
+              <ui-select-choices repeat="item in rptAdmin.dateRange.fromDates | filter: $select.search">
+                  <div data-ng-bind-html="item | reportsMgmtDateFormat | highlight: $select.search" data-ng-bind-value="item"></div>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+          <div class="column col3">
+            <label for="date-to-select">To</label>
+            <ui-select id="date-to-select" data-ng-model="rptAdmin.date.to" theme="select2" search-enabled="false" data-ng-disabled="rptAdmin.reportNotSelected" title="Date to">
+              <ui-select-match placeholder="{{rptAdmin.dateRange.initialDate | reportsMgmtDateFormat}}">{{$select.selected | reportsMgmtDateFormat}}</ui-select-match>
+              <ui-select-choices repeat="item in rptAdmin.dateRange.toDates | filter: $select.search">
+                  <div data-ng-bind-html="item | reportsMgmtDateFormat | highlight: $select.search" data-ng-bind-value="item"></div>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+          <div class="column col4">
+            <input class="button button-submit data-ng-class:{'disabled': rptAdmin.reportNotSelected}" type="submit" value="Manage reports" data-ng-disabled="rptAdmin.reportNotSelected">
+          </div>
+      </li>
+    </ul>
+</form>
+
+<div id="infoMessages" class="ui-messages ui-messages-info ui-widget" role="status" aria-live="polite" data-ng-show="rptAdmin.showNoResults">
+  <div class="ui-messages-info-content ui-corner-all">
+    <span class="ui-messages-icon ui-messages-icon-info"></span>
+    <ul class="ui-messages-list ui-messages-list-info">
+      <li class="ui-messages-item ui-messages-item-info">
+        <span class="ui-messages-detail ui-messages-detail-info">Sorry, no reports were found. Please try again.</span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div data-tabs-container id="reportAdminTabs" data-ng-show="rptAdmin.viewResultsTabs">
+  <div data-tabs-tab data-ng-repeat="tab in rptAdmin.reportTabs" data-bind="tab.tabSelected" data-name="{{tab.status.name}} ({{tab.reports.length}})">
+    <div id="infoMessages" class="ui-messages ui-messages-info ui-widget" role="status" aria-live="polite" data-ng-show="tab.showNoResults">
+      <div class="ui-messages-info-content ui-corner-all">
+        <span class="ui-messages-icon ui-messages-icon-info"></span>
+        <ul class="ui-messages-list ui-messages-list-info">
+          <li class="ui-messages-item ui-messages-item-info" data-bindonce="tab.status.name">
+            <span class="ui-messages-detail ui-messages-detail-info" data-bo-text="'No ' + (tab.status.name | lowercase) + ' reports were found.'"></span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- <p data-ng-show="tab.showNoResults">Sorry, no reports were found. Please try again.</p> -->
+    <form submit-handler data-ng-model="tab.manageBinding" data-ng-show="tab.viewResultsTable">
+      <table class="reports-list {{tab.status.name | lowercase}}">
+        <caption>{{tab.reportType}}: {{tab.reportName}}</caption>
+        <thead>
+          <tr class="with-checkbox">
+            <th class="with-checkbox nowrap"><pretty-checkbox data-ng-model="tab.setSelectAllCheckbox" master-checkbox data-ng-class="{selected: tab.allReportsSelected()}" data-ng-checked="tab.allReportsSelected()" data-ng-click="tab.allReportsClicked()" label="false" class="clearfix"><label>All</label></pretty-checkbox></th>
+            <th class="nowrap">Report date</th>
+            <th class="nowrap">Provider entity</th>
+            <th class="nowrap" data-ng-bind="tab.status.name"></th>
+            <th class="nowrap">&nbsp;</th>
+          </tr>
+        </thead>
+        <!--<tfoot><tr><td></td></tr></tfoot>-->
+        <tbody>
+          <tr data-ng-repeat="reportItem in tab.reports" class="with-checkbox">
+            <td class="with-checkbox nowrap">
+              <pretty-checkbox data-ng-model="reportItem.reportSelected" label="false"></pretty-checkbox>
+            </td>
+            <td class="with-date nowrap" data-ng-bind="reportItem.filteredDate">
+            </td>
+            <td data-ng-bind="reportItem.preName">
+            </td>
+            <td class="with-date nowrap" data-ng-bind="reportItem.lastUpdate">
+            </td>
+            <td class="with-link nowrap">
+              <!--<a data-ng-href="{{reportItem.downloadUrl}}" class="with-icon ng-class:{'pdf': reportItem.pdf, 'xls': reportItem.xls}" data-ng-click="rptView.reauth(reportItem.reauthUrl, reportItem.downloadUrl)">Report</a>-->
+              <!-- do not know report types at this time -->
+              <a data-ng-href="{{reportItem.downloadUrl}}{{rsApp.token}}" data-ng-click="rsApp.reauth()" target="_blank">Report</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <ul class="form-columns container-buttons reports-management-actions" data-ng-show="tab.showPublish || tab.showRetract || tab.showReject">
+        <li>
+          <input class="button button-submit data-ng-class:{'disabled': !tab.anyReportSelected}" type="submit" value="Publish" data-ng-disabled="!tab.anyReportSelected" data-ng-show="tab.showPublish" data-ng-click="tab.publish()">
+          <input class="button button-submit data-ng-class:{'disabled': !tab.anyReportSelected}" type="submit" value="Retract" data-ng-disabled="!tab.anyReportSelected" data-ng-show="tab.showRetract" data-ng-click="tab.retract()">
+          <input class="button button-submit data-ng-class:{'disabled': !tab.anyReportSelected}" type="submit" value="Reject" data-ng-disabled="!tab.anyReportSelected" data-ng-show="tab.showReject" data-ng-click="tab.reject()">
+        </li>
+      </ul>
+    </form>
+  </div>
+</div>

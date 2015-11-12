@@ -1,0 +1,50 @@
+$user-class-arr:
+  '.provider-contact',
+  '.reports-admin',
+  '.entity-admin',
+  '.internal-viewer'
+;
+
+
+
+@mixin hideandshow() {
+  display: none;
+  body & {
+    display: block;
+  }
+}
+
+.provider-contact {
+  display: none;
+  .provider-contact {
+    display: block;
+  }
+}
+
+.reports-admin {
+  display: none;
+  .reports-admin {
+    display: block;
+  }
+}
+
+.entity-admin {
+  display: none;
+  .entity-admin {
+    display: block;
+  }
+}
+
+.internal-viewer {
+  display: none;
+  .internal-viewer {
+    display: block;
+  }
+}
+
+body.provider-contact,
+body.reports-admin,
+body.entity-admin,
+body.internal-viewer {
+  display: block;
+}

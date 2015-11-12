@@ -1,0 +1,42 @@
+ /* ==========================================================================
+  Back to top
+   ========================================================================== */
+@import "rgbapng"; // https://github.com/aaronrussell/compass-rgbapng
+
+.back-to-top {
+    display: none;
+    //position: absolute;
+ 	@include rgba-background(rgba(221,221,221,.85));
+    //bottom: 0;
+    //@include rem(right, 20px);
+    //right: 0;
+    @include rem(padding, 10px);
+    z-index: 2;
+    @include border-top-left-radius(5px);
+    &:hover {
+    	border-bottom: 0 none;
+    	@include rgba-background(rgba(187,187,187,.85));
+    }
+ }
+
+ #back-to-top-container {
+    display: none;
+    position: fixed;
+    max-width: $document-width;
+    bottom: 0;
+    width: 100%;
+    text-align: right;
+    @include rem(margin-left, -20px);
+    @include respond(tablets) {
+        @include rem(padding-right, 20px !important);
+    }
+    &.active {
+        .back-to-top {
+            display: inline-block;
+        }
+    }
+}
+
+.services #back-to-top-container {
+	display: block;
+}

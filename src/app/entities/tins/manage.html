@@ -1,0 +1,67 @@
+<p class="navigate navigate-back" data-ng-if="rsApp.showReturnToSearch()"><a href="" bindonce class="return-to-search" data-ng-click="tinManage.returnToSearch()" data-bo-text="rsApp.returnToSearch"></a></p>
+
+<p class="required-message">Required fields are marked with</p>
+
+<form novalidate data-ng-submit="tinManage.formSubmitted || tinManage.showCreate ? tinManage.create() : tinManage.update()" id="manage-tin-form" name="tinManage.manageTinForm">
+  <ul class="form-columns form-manage-tin">
+    <li data-ng-if="tinManage.showEdit" class="row" data-bindonce="tinManage.selected">
+      <label for="tin-output" class="column col1">TIN</label>
+      <p class="column col2" id="tin-output" data-ng-bind="tinManage.tins.selected.tin"></p>
+    </li>
+    <li data-ng-if="tinManage.showCreate" class="row" data-ng-class="{ 'hide-errors': tinManage.manageTinFormData.tin.checkHideErrors(), 'show-required': tinManage.manageTinFormData.tin.showRequired, 'show-invalid': tinManage.manageTinFormData.tin.showInvalid };">
+      <label for="tin-input" class="required column col1">TIN</label>
+      <div class="column col2" data-type-ahead data-on-blur="tinManage.manageTinFormData.tin.checkValidity()" data-is-required="true" data-min-chars="{{tinManage.manageTinFormData.tin.minLength}}" data-no-select data-input-id="tin-input" data-input-name="tinInput" data-items="tinManage.tins.tinAndNameList" data-prompt="Begin typing a TIN to add" data-title="tin" data-subtitle="name" data-model="tinManage.tins.selected" data-output="tinManage.tins.selected.tin" data-on-type-ahead="tinManage.onTinTypeAhead($event)"></div>
+      <div class="errors column col3">
+        <span class="presubmit-error required">This field is required.</span>
+        <span class="presubmit-error invalid">Must be a unique, 9-digit number.</span>
+      </div>
+    </li>
+    <li class="row" ng-class="{ 'hide-errors': tinManage.manageTinFormData.groupName.checkHideErrors(), 'show-required': tinManage.manageTinFormData.groupName.showRequired, 'show-invalid': tinManage.manageTinFormData.groupName.showInvalid };">
+      <label class="required column col1">Group name</label>
+      <div class="column col2" data-type-ahead data-no-select data-on-blur="tinManage.manageTinFormData.groupName.checkValidity()" data-is-required="true" data-min-chars="{{tinManage.manageTinFormData.groupName.minLength}}" data-input-id="group-name" data-input-name="groupName" data-items="tinManage.tins.tinAndNameList" data-prompt="Begin typing a name to add" data-title="name" data-subtitle="tin" data-model="tinManage.tins.selected.name" data-output="tinManage.tins.selected.name" data-on-type-ahead="tinManage.onGroupNameTypeAhead($event)" data-on-select="tinManage.onGroupNameSelect()" data-ignore-case data-suppress-subtitle></div>
+      <div class="errors column col3">
+        <span class="presubmit-error required">This field is required.</span>
+        <span class="presubmit-error invalid">Name must be unique (case-insensitive).</span>
+      </div>
+    </li>
+    <li class="row" data-ng-if="tinManage.showEdit && tinManage.tins.selected.pres.length > 0">
+      <label class="column col1 label-table" data-ng-if="tinManage.tins.selected.pres.length > 0">Provider entities<span class="tooltip tooltip-right tooltip-standard" ui-jq="tipso" ui-options="{{rsApp.tipsoConfig}}" title="Using the 'Remove' check box will remove the current association between TIN and PRE.  Historical association information is saved in an audit table."></span></label>
+      <div class="column col2 span2">
+        <table class="table-no-border table-no-wrap table-fixed" id="tin-pre-assoc-table">
+          <tbody>
+            <tr date-range-repeater data-ng-if="tinManage.tins.selected.pres.length > 0" data-ng-repeat="pre in tinManage.tins.selected.pres track by pre.assocId" data-ng-class="{ 'row-multiple' : tinManage.tins.selected.pres.length > 1, 'invalid': pre.showInvalid }" data-ng-class-odd="'odd'" data-ng-class-odd="'odd'" data-ng-class-even="'even'" data-ng-form="preForm">
+              <td class="with-checkbox">
+                <pretty-checkbox data-ng-model="pre.remove" name="tinRemove" value="" label="false" data-watch-input="tinManage.checkState($event)">
+                  <label>Remove</label>
+                </pretty-checkbox>
+              </td>
+              <td class="cell-align-left with-pre-name">
+                <a href="" data-ng-bind="pre.name" data-ng-click="tinManage.editPre(pre.id)"></a>
+              </td>
+              <td class="with-date-range cell-align-right" data-ng-class="{ 'show-invalid': pre.showInvalid }">
+                <input type="text" data-watch-input="tinManage.checkState($event)" data-watch-input-bind="blur keyup" data-ng-minlength="10" data-ng-maxlength="10" required data-ui-mask="99/99/9999" class="input-date-range" name="tinPreEffDate" data-moda-date-format="{{tinManage.modaDateFormat}}" data-original-date-format="{{tinManage.originalDateFormat}}" data-ng-model="pre.effDate" data-ng-class="{'invalid-date': tinManage.manageTinFormData.tinPreDateRange.checkIsValid(preForm)}" />
+                <span>to</span>
+                <input type="text" data-watch-input="tinManage.checkState($event)" data-watch-input-bind="blur keyup" data-ng-minlength="10" data-ng-maxlength="10" required data-ui-mask="99/99/9999" class="input-date-range" name="tinPreEndDate" data-moda-date-format="{{tinManage.modaDateFormat}}" data-original-date-format="{{tinManage.originalDateFormat}}" data-ng-model="pre.endDate" data-ng-class="{'invalid-date': tinManage.manageTinFormData.tinPreDateRange.checkIsValid(preForm)}" />
+              </td>
+            </tr>
+            <tr data-ng-class="{ 'row-multiple' : tinManage.tins.selected.pres.length > 1 }">
+              <td class="with-checkbox">
+                <data-ng-include src="tinManage.deactivatePartial"></data-ng-include>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </li>
+
+    <li class="row" data-ng-if="tinManage.showEdit && tinManage.tins.selected.pres.length === 0">
+      <data-ng-include src="tinManage.deactivatePartial"></data-ng-include>
+    </li>
+    
+    <li class="row">
+      <span class="column col1"></span>
+      <input class="column col2 button button-submit data-ng-class:{'disabled': tinManage.manageTinForm.$invalid || tinManage.manageTinForm.$pristine || tinManage.manageTinFormData.formReverted }" type="submit" value="{{tinManage.showCreate ? 'Create TIN' : 'Update TIN'}}" data-ng-disabled="tinManage.manageTinForm.$invalid || tinManage.manageTinForm.$pristine  || tinManage.manageTinFormData.formReverted" />
+    </li>
+  </ul>
+</form>
+

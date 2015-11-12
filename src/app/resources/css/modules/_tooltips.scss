@@ -1,0 +1,45 @@
+//custom styles for the tooltip trigger (not tipso or other tooltips themselves - see vendor files)
+
+.tooltip {
+  //background-image: url("../images/moda-sprite.png"); //not working as expected, using modernizer body class instead
+  background-repeat: no-repeat;
+  border: 0 none;
+  color: $modern-plum;
+  cursor: help;
+  font-familiy: $omnes-med;
+  padding-bottom: 3px;
+  text-decoration: none;
+}
+
+.tooltip-right {
+  padding-right: 20px;
+}
+
+.tooltip-left {
+
+}
+
+.tooltip-standard {
+  background-image: url("../images/moda-sprite.svg");
+  background-position: 100% -148px;
+  padding-bottom: 3px;
+  .no-svg & {
+    background-image: url("../images/moda-sprite.png");
+  }
+}
+
+.tooltip-deactivated {
+  background-image: url(../images/icon_disabled.svg);
+  height: 16px;
+  width: 16px;
+  .no-svg & {
+    background-image: url(../images/icon_disabled.png);
+  }
+  .reports-list & {
+    &.tooltip-left {
+      margin-left: -22px;
+      margin-right: 6px;
+      padding-left: 16px;
+    }
+  }
+}

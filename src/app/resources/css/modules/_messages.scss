@@ -1,0 +1,53 @@
+/*=====================================================
+
+  Messages
+
+  ======================================================*/
+.ui-messages {
+  //min-height: 3em;
+  display: table;
+  width: 100%;
+  margin-bottom: 1em;
+  padding: 0.75em 1em;
+  &.ui-messages-error {
+    background-color: $lighter-yellow;
+  }
+  &.ui-messages-info {
+    background-color: $success-bg;
+  }
+}
+.ui-messages-error-content, .ui-messages-info-content {
+  display: table-row;
+}
+.ui-messages-icon, .ui-messages-icon {
+  display: table-cell;
+  //height: 32px;
+  height: 26px;
+  width: 26px;
+}
+.ui-messages-icon-error {
+  background: url("../images/icon_alert.png") top center no-repeat;
+}
+.ui-messages-icon-info {
+  background: url("../images/icon_info.png") top center no-repeat;
+}
+.ui-messages-list {
+  display: table-cell;
+  //margin-top: 1em;
+  margin-bottom: 0;
+  margin-left: 0;
+  padding-left: 0.5em;
+  vertical-align: middle;
+}
+.ui-messages-item {
+  list-style-type: none;
+  list-style-image: none !important;
+  padding-bottom: 0;
+  padding-top: 0.5em;
+  &:first-child {
+    padding-top: 0;
+  }
+}
+.ui-messages-detail {
+  font-family: omnes_ods_mediumregular, verdana, sans-serif;
+}

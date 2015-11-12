@@ -1,0 +1,19 @@
+//for deactivated entities
+
+.deactivated {
+  &:before {
+    background-image: url(../images/icon_disabled.svg);
+    background-repeat: no-repeat;
+    content: '';
+    height: 16px;
+    margin-left: -16px;
+    margin-right: 6px;
+    padding-right: 16px;
+    width: 16px;
+  }
+  .no-svg & {
+    &:before {
+      background-image: url(../images/icon_disabled.png);
+    }
+  }
+}

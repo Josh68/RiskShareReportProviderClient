@@ -1,0 +1,155 @@
+// Your custom base SCSS (for elements) should be written here...
+
+@import "compass/css3";
+@import "compass/typography/vertical_rhythm";
+@include establish-baseline;
+
+/*=====================================================
+
+  Top-level
+
+  ======================================================*/
+
+html {
+  font-family: $omnes-reg;
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+  overflow-y: scroll;
+  &.no-js{
+    display: none;
+  }
+  & * {
+    font-weight: normal !important;
+  }
+}
+
+body {
+    //font-size: $base-font-size;
+    //line-height: 1.2; //gumby is handling
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/*=====================================================
+
+  Links
+
+  ======================================================*/
+
+
+a {
+    color: $modern-plum;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+      //background: transparent;
+    }
+    &:visited,
+    &:hover,
+    &:active {
+      color: $modern-plum;
+    }
+    &.touchstarted {
+        text-decoration: underline;
+    }
+    &.touchended:hover {
+        text-decoration: none;
+    }
+}
+
+li, a {
+  //fix issue with tap highlighting on android/webkit
+  -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
+}
+
+/*=====================================================
+
+  Base elements
+
+  ======================================================*/
+
+p, ul, ol, td, input, form, div, span {
+  font-family: $omnes-reg;
+}
+p, ul, ol, td, input, div, span {
+  color: $warm-brown;
+}
+input {
+  font-size: $base-font-size;
+}
+// p, ul, ol {
+//     margin-bottom: $default-text-bottom-margin;
+// }
+
+//this will break vertical rhythm with Gumby
+
+/*=====================================================
+
+  Images
+
+  ======================================================*/
+img {
+
+}
+
+/*=====================================================
+
+  Grid
+
+  ======================================================*/
+
+.gridStyle {
+  width: 500px;
+  height: 500px;
+
+    .ngHeaderSortColumn {
+      background-color: #2FB5B7;
+    }
+
+    .ngHeaderText {
+      color: #FFE92C;
+      padding-left: 1em;
+    }
+
+    .ngRow.even {
+      background-color: #F0EDEB;
+    }
+
+    .ngCellText  {
+      padding-left: 1em;
+    }
+
+    .ngVerticalBarVisible {
+      background-color: #2FB5B7;
+    }
+}
+
+ /*=====================================================
+
+  Reports Table
+
+  ======================================================*/
+  // .reports-list {
+  //   width: 425px;
+  //   caption {
+  //     padding: .5em;
+  //   }
+  //   tr, th {
+  //     height: 1.2em;
+  //   }
+  //   tr {
+  //     td {
+  //       font-family: $omnes-med;
+  //       padding: .5em;
+  //     }
+  //     td:nth-child(n+2) {
+  //       /* style guide mentions this but wireframe wants them to the left */
+  //       /* text-align: center; */
+  //     }
+  //   }
+  //   tr:nth-child(even) {
+  //     background-color: $zebra-stripe;
+  //   }
+  // }

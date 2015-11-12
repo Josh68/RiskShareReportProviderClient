@@ -1,0 +1,578 @@
+//Mixins, extends, placeholders
+%label-with {
+  vertical-align: top !important;
+}
+
+.input-with-button {
+  overflow: hidden;
+  position: relative;
+  @include border-radius(4px);
+  .input-button {
+    background-color: #a50069;
+    border: 1px solid #a50069;
+    bottom: 0;
+    color: $white;
+    font-family: $omnes-med;
+    margin: auto;
+    position: absolute;
+    right: 0;
+    @include border-radius(0 4px 4px 0);
+    @include rem(font-size, 1em);
+    @include rem(padding, 0 0 2px);
+    @include rem(width, 38px);
+    &.disabled {
+      /* opacity: 0.31;*/
+    }
+    &.secondary {
+      background-color: $white;
+      color: #a50069;
+    }
+  }
+}
+
+input[type="text"],
+input[type="textarea"],
+input[type="password"],
+input[type="email"],
+input.type-ahead-input {
+  border: 1px solid $button-box-border;
+  //box-sizing: content-box;
+  overflow: hidden;
+  //height: 21px;
+  padding: 6px 4px 6px 0.5em;
+  //@include rem(padding, 10px 5px);
+  //  width: 100%;
+  @include border-radius(4px);
+}
+
+input.type-ahead-input { 
+  &.column {
+    width: 100% !important;
+  }
+}
+
+input[type="submit"] {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+input[type="password"] {
+  letter-spacing: 1px; //increase spacing for obfuscation chars
+}
+
+.no-svg { //hacky way to target IE8 here
+  input[type="password"] {
+    font-family: Helvetica, Arial, sans-serif !important;
+  }
+}
+
+/*hack to override chrome (webkit) autofill background coloring*/
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px white inset;
+  &.ui-state-error {
+    -webkit-box-shadow: 0 0 0 1000px $lighter_yellow inset;
+    &.ui-focused {
+      -webkit-box-shadow: 0 0 0 1000px white inset;
+    }
+  }
+}
+
+input:focus {
+  outline-style: none;
+  outline-width: 0;
+}
+
+.rs-input.ng-dirty.ng-invalid {
+  /* background: $lighter-yellow; */
+}
+
+.rs-input.ng-dirty.ng-invalid.active {
+  background: $white;
+}
+
+.presubmit-error {
+  background: $lighter-yellow;
+  //width: 348px;
+  min-height: 30px;
+  padding: 0 0 0 2.8em;
+  font-family: $omnes-med;
+  background-image: url('../images/icon_alert.png');
+  background-repeat: no-repeat;
+  background-position: 7px center;
+}
+/*=====================================================
+
+  validation feedback
+
+  ======================================================*/
+
+.errors {
+  padding-left: 14px;
+}
+
+.presubmit-error {
+  display: none;
+  padding: 0.5em 2.8em 0.5em;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.show-invalid {
+  .presubmit-error {
+    &.invalid {
+      display: block !important;
+    }
+  }
+  &.hide-errors {
+    .presubmit-error {
+      &.invalid {
+        display: none !important;
+      }
+    }
+  }
+}
+
+.show-required {
+  .presubmit-error {
+    &.required {
+      display: block !important;
+    }
+  }
+  &.hide-errors {
+    .presubmit-error {
+      &.required {
+        display: none !important;
+      }
+    }
+  }
+  &.show-invalid,
+  &.show-mismatch {
+    .presubmit-error {
+      &.required {
+        display: none !important;
+      }
+    }
+  }
+}
+
+.show-mismatch {
+  .presubmit-error {
+    &.mismatch {
+      display: block !important;
+    }
+  }
+  &.hide-errors {
+    .presubmit-error {
+      &.mismatch {
+        display: none !important;
+      }
+    }
+  }
+}
+
+.show-invalid,
+.show-required,
+.show-mismatch {
+  input[type="text"], input[type="email"], input[type="password"] {
+    background-color: $lighter-yellow;
+  }
+  &.hide-errors {
+    input[type="text"], input[type="email"], input[type="password"] {
+      background-color: white;
+    }
+  }
+}
+/*=====================================================
+
+  form field layout
+
+  ======================================================*/
+
+.profile-form {
+  box-sizing: content-box;
+  border-spacing: 14px 10px;
+  display: table;
+  left: -14px; //subtract border-spacing left
+  position: relative;
+  table-layout: fixed;
+  width: calc(100% + 28px); //account for border-spacing left and right
+  .errors {
+    padding-left: 0;
+  }
+  .form-column {
+    display: table-column;
+  }
+  .form-row {
+    vertical-align: middle;
+    display: table-row;
+    width: 100%;
+    label {
+      text-align: left;
+      font-family: $omnes-med;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="textarea"],
+    input[type="password"] {
+      box-sizing: content-box;
+      padding-left: .5em;
+    }
+    input[type="submit"].button {
+      float: left;
+      margin-top: 0.5em;
+    }
+    input::-webkit-input-placeholder {
+      color: $placeholder;
+      letter-spacing: normal;
+    }
+    input:-moz-placeholder {
+      color: $placeholder;
+      letter-spacing: normal;
+    }
+    input::-moz-placeholder {
+      color: $placeholder;
+      letter-spacing: normal;
+    }
+    input:-ms-input-placeholder {
+      color: $placeholder;
+      letter-spacing: normal;
+    }
+    > * {
+      display: table-cell;
+      float: none;
+      vertical-align: middle;
+      overflow: hidden;
+    }
+  }
+}
+
+.ui-inputfield {
+  margin: 0;
+  padding: 4px;
+  outline: medium none;
+  height: 21px;
+  box-shadow: none;
+  /* remove red glow on invalid fields in FF */
+}
+
+input.ui-inputtext {
+  height: 21px;
+}
+
+.label.required,
+.required-message {
+  color: #493b31
+}
+
+label.required:after,
+.label.required:after,
+.required-message:after {
+  content: " *";
+  color: #a50069;
+  /* margin-right: -10px; */
+  
+  font-family: $omnes-med;
+  font-size: 18px;
+  vertical-align: middle;
+}
+
+.label-table {
+  @extend %label-with;
+  position: relative;
+  top: 10px; //adjust according to final borderless table layout
+}
+
+.label-list {
+  @extend %label-with;
+}
+
+.form-columns {
+  width: 100%;
+  list-style: none;
+  box-sizing: border-box;
+  border-spacing: 0 14px;
+  display: table;
+  table-layout: fixed;
+  //deal with space between form elements using plain padding, setting border-spacing L/R to 0 to avoid having the whole row offset right
+  .row {
+    display: table-row;
+    min-height: 31px; //calculated height of the styled inputs
+  }
+  .column {
+    //position: relative;
+    display: table-cell;
+    vertical-align: middle;
+    &.errors {
+      position: relative;
+    }
+  }
+  &.label-above {
+    .column {
+      vertical-align: bottom;
+    }
+  }
+  &.reports-view-filters {
+    .two-col {
+      .col1 {
+        width: 79.5%;
+        label {
+          width: 18%;
+          display: inline-block;
+          text-align: left;
+          vertical-align: middle;
+          margin: 0;
+        }
+        .inner-date {
+          width: auto;
+          @include rem(margin, 0 .7em);
+        }
+        div {
+          /* display: inline-block; */
+        }
+      }
+      .col2 {
+        width: 19.5%;
+      }
+      .pre-match {
+        min-width: 35%;
+      }
+      .pre-list,
+      .report-list {
+        width: 260px;
+      }
+      .date-from-menu {
+        width: 112px;
+      }
+      .date-to-menu {
+        width: 111px;
+      }
+      .date-row-container {
+        width: 425px;
+      }
+    }
+  }
+  &.reports-management-filters {
+    table-layout: auto;
+    .four-col {
+      label {
+        display: block;
+      }
+      .select2-container {
+        width: 100%;
+      }
+      .col1 {
+        width: 40%;
+        padding-right: 0.8em;
+      }
+      .col2,
+      .col3 {
+        width: 20%;
+        padding-right: 0.8em;
+      }
+      .col4 {
+        width: 20%;
+        .button-submit {
+          height: 31px;
+          vertical-align: middle;
+        }
+      }
+    }
+  }
+}
+
+.form-key {
+  display: inline-block;
+}
+
+/*----------------------------------------------
+/* Either report filter set (view or manage)
+----------------------------------------------*/
+
+.form-reports {
+  margin-bottom: 16px; //with 14px cell-spacing on bottom adds to 30px
+}
+/*----------------------------------------------
+/* The change password and security form
+----------------------------------------------*/
+
+// total form row cell spacing is 14px *
+
+#password-form,
+#security-form,
+#reset-password-form {
+  .column {
+    &.button {
+      width: auto;
+    }
+  }
+  .presubmit-error {
+    padding: 0.5em 2.8em 0.5em;
+    white-space: nowrap;
+    width: 100%;
+    display: none;
+  }
+  label {
+    white-space: nowrap;
+  }
+}
+
+#password-form,
+#reset-password-form {
+  .col1 {
+    width: 22%;
+  }
+  .col2 {
+    width: calc(100% - 14px);
+  }
+  .col3 {
+    width: 58%;
+  }
+  // input[type="text"], //fix for confounding global style on typed inputs that are columns
+  // input[type="textarea"],
+  // input[type="password"],
+  // input[type="email"] {
+  //   &.column.col2 {
+  //     width: 90% !important;
+  //   }
+  // }
+}
+
+#verify-user-form,
+#forgot-username-form {
+  .col1 {
+    width: 14%;
+  }
+  .col2 {
+    width: calc(100% - 14px);
+  }
+  .col3 {
+    width: 50%;
+  }
+}
+
+#create-user-form {
+  .col1 {
+    width: 18%;
+  }
+  .col2 {
+    width: calc(100% - 14px);
+  }
+  .col3 {
+    width: 55%;
+  }
+}
+
+
+#security-form,
+#verify-security-form,
+#verify-password-form {
+  .col1 {
+    width: 10%;
+  }
+  .col2 {
+    width: 30%;
+  }
+}
+
+#manage-hs-form,
+#manage-pre-form {
+  .col1 {
+    width: 25%;
+  }
+  .col3 {
+    width: 45%;
+  }
+}
+
+#manage-hs-form {
+  .col2 {
+    width: 35%;
+  }
+}
+
+#manage-pre-form {
+  .col2 {
+    width: 30%;
+    &#hs-name {
+      width: 100%;
+    }
+    &.span2 { //this applies to the tin association table
+      > * {
+        width: ($content-width - ($content-width * .25)); //this sucks, but my reliance on css table layout is coming back to haunt me
+      }
+    }
+  }
+}
+
+#manage-pre-form {
+  .col3 {
+    &.with-date-range {
+      text-align: right;
+      padding-right: 19px;
+    }
+  }
+}
+
+#manage-tin-form {
+  .col1 {
+    width: 20%;
+  }
+  .col2 {
+    width: 32%;
+    &.span2 {
+      > * {
+        width: ($content-width - ($content-width * .20)); //this sucks, but my reliance on css table layout is coming back to haunt me
+      }
+    }
+  }
+  .col3 {
+    width: 50%;
+  }
+}
+
+#search-entity-form {
+  .form-columns {
+    width: 54%;
+  }
+  .col1 {
+    width: 40%;
+  }
+  .col2 {
+    width: 100%;
+  }
+}
+/*=====================================================
+
+Specific to tin-pre-assoc-table
+
+======================================================*/
+
+#tin-pre-assoc-table {
+  .input-date-range {
+    width: 90px;
+  }
+  .with-checkbox {
+    width: 23%;
+  }
+  .row-multiple {
+    .with-checkbox {
+      padding-left: 10px;
+    }
+  }
+  .with-pre-name {
+    width: auto;
+  }
+  .with-date-range {
+    width: 35%;
+    &.cell-align-right {
+      padding-right: 10px;
+    }
+  }
+  td, th {
+    &:first-child {
+      padding-left: 1px;
+    }
+  }
+}

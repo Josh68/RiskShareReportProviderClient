@@ -1,0 +1,148 @@
+<div class="content-intro">
+  <p>In order to continue self registration process, please provide the following information.</p>
+</div>
+
+
+<form novalidate data-ng-show="!selfRegistration.stepTwo" class="" data-ng-submit="selfRegistration.accountVerify()" name="selfRegistration.verifyUserForm" data-ng-bind-attrs="{id: selfRegistration.verifyUserFormId}">
+  <fieldset class="forms">
+    <ul class="profile-form form">
+      <li class="form-row">
+        <label class="column col1" for="firstName">First Name</label>
+        <input class="column col2 rs-input input-password ui-inputfield ui-inputtext" 
+        	id="security-firstName" 
+        	name="firstName" 
+        	type="text" 
+        	autocomplete="off" 
+        	data-ng-required="true"
+          placeholder="Required"
+          data-ng-model="selfRegistration.firstName" 
+        	maxlength="60" />
+      	<div class="column col3">&nbsp;</div>
+      </li>
+      <li class="form-row">
+        <label class="column col1" for="lastName">Last Name</label>
+        <input class="column col2 rs-input input-password ui-inputfield ui-inputtext" 
+        	id="security-lastName" 
+        	name="lastName" 
+        	type="text" 
+        	autocomplete="off" 
+        	data-ng-required="true"
+          placeholder="Required"
+          data-ng-model="selfRegistration.lastName" 
+        	maxlength="30" />
+      	<div class="column col3">&nbsp;</div>
+      </li>
+      <li class="form-row">
+        <label class="column col1" for="email">Email address</label>
+        <input class="column col2 rs-input input-password ui-inputfield ui-inputtext" 
+        	id="security-email" 
+        	name="email" 
+        	type="email" 
+        	autocomplete="off" 
+        	data-ng-required="true"
+          placeholder="Required"
+        	data-ng-model="selfRegistration.email" 
+        	maxlength="60" />
+      	<div class="column col3">&nbsp;</div>
+      </li>
+      <li class="form-row">
+        <label class="column col1"></label>
+        <input type="submit"
+        	class="column col2 button button-submit data-ng-class:{ 'disabled': selfRegistration.verifyUserForm.$invalid || selfRegistration.verifyUserForm.$pristine}" 
+        	data-ng-disabled="selfRegistration.verifyUserForm.formSubmitted || selfRegistration.verifyUserForm.$invalid || selfRegistration.verifyUserForm.$pristine"
+        	data-ng-class="{'disabled': selfRegistration.formSubmitted === true}" 
+        	value="{{selfRegistration.formSubmitted ? 'Please wait...' : 'Submit'}}" />
+      </li>
+    </ul>
+  </fieldset>
+</form>
+
+
+
+<form novalidate data-ng-show="selfRegistration.stepTwo" class="" data-ng-submit="selfRegistration.formSubmitted || selfRegistration.accoutCreate()" name="selfRegistration.createUserForm" data-ng-bind-attrs="{id: selfRegistration.createUserFormId}">
+  <fieldset class="forms">
+    <ul class="profile-form form">
+      <li class="form-row" data-ng-class="{ 'show-required': selfRegistration.passwordData.username.showRequired() }">
+        <label class="column col1" for="firstName">Username</label>
+        <input class="column col2 rs-input input-password ui-inputfield ui-inputtext" 
+        	id="security-firstName" 
+        	name="username" 
+        	type="text" 
+        	autocomplete="off" 
+        	data-ng-required="true"
+          data-ng-model="selfRegistration.username"
+          data-ng-focus="selfRegistration.passwordData.username.hasFocus = true;"
+          data-ng-blur="selfRegistration.passwordData.username.hasFocus = false;"
+        	maxlength="60"
+          data-ng-class="{ 'required': selfRegistration.createUserForm.username.$viewValue === '' && selfRegistration.createUserForm.username.$dirty }"
+        	placeholder="Required" />
+      	<div class="errors column col3">
+          <span class="presubmit-error required">This field is required.</span>
+        </div>
+      </li>
+      <li class="form-row" data-ng-class="{ 'show-invalid': selfRegistration.passwordData.newPass.showInvalid(), 'show-required': selfRegistration.passwordData.newPass.showRequired() };">
+        <label for="newPass" class="column col1">Password</label>
+        <input class="rs-input input-password new-password ui-inputfield ui-inputtext column col2"
+        type="password"
+        id="newPass"
+        name="newPass"
+        autocomplete="off"
+        data-ng-model="selfRegistration.passwordData.newPass.value"
+        data-ng-minlength="6"
+        data-ng-maxlength="15"
+        maxlength="15"
+        placeholder="6-15 characters"
+        data-ng-focus="selfRegistration.passwordData.newPass.hasFocus = true;"
+        data-ng-blur="selfRegistration.passwordData.newPass.hasFocus = false;"
+        data-ng-class="{ 'active': selfRegistration.passwordData.newPass.hasFocus, 'invalid': selfRegistration.createUserForm.newPass.$invalid && selfRegistration.createUserForm.newPass.$dirty, 'required': selfRegistration.createUserForm.newPass.$viewValue === '' && selfRegistration.createUserForm.newPass.$dirty };"
+        data-ng-required="true"
+         />
+
+        <div class="errors column col3">
+          <span class="presubmit-error required">This field is required.</span>
+          <span class="presubmit-error invalid">Password must be 6-15 alphanumeric characters.</span>
+        </div>
+      </li>
+
+      <li class="form-row" data-ng-class="{ 'show-required': selfRegistration.passwordData.verifyPass.showRequired(), 'show-invalid': selfRegistration.passwordData.verifyPass.showInvalid(), 'show-mismatch': selfRegistration.passwordData.verifyPass.showMismatch() };">
+        <label for="verifyPass" class="column col1">Retype password</label>
+        <input class="rs-input input-password confirm-password ui-inputfield ui-inputtext column col2"
+        type="password"
+        id="verifyPass"
+        name="verifyPass"
+        autocomplete="off"
+        data-ng-model="selfRegistration.passwordData.verifyPass.value"
+        data-ng-minlength="6"
+        data-ng-maxlength="15"
+        maxlength="15"
+        placeholder="6-15 characters"
+        ui-validate=" '$value===selfRegistration.passwordData.newPass.value && selfRegistration.createUserForm.newPass.$valid' "
+        ui-validate-watch=" ['selfRegistration.passwordData.verifyPass.value', 'selfRegistration.passwordData.newPass.value'] "
+        data-ng-focus="selfRegistration.passwordData.verifyPass.hasFocus = true;"
+        data-ng-blur="selfRegistration.passwordData.verifyPass.hasFocus = false;"
+        data-ng-class="{ 'active': selfRegistration.passwordData.verifyPass.hasFocus, 'invalid': selfRegistration.createUserForm.verifyPass.$invalid && selfRegistration.createUserForm.verifyPass.$dirty, 'required': selfRegistration.createUserForm.verifyPass.$viewValue === '' && selfRegistration.createUserForm.verifyPass.$dirty };"
+        data-ng-required="true"
+         />
+
+        <div class="errors column col3">
+          <span class="presubmit-error required">This field is required.</span>
+
+          <span class="presubmit-error invalid">Password must be 6-15 alphanumeric characters.</span>
+
+          <span class="presubmit-error mismatch">Both instances of the new password must match.</span>
+        </div>
+      </li>
+
+      <li class="form-row">
+        <label class="column col1"></label>
+        <input class="button button-submit column col2"
+        type="submit"
+        data-ng-disabled="selfRegistration.formSubmitted || selfRegistration.createUserForm.$invalid"
+        data-ng-class="{ 'disabled': selfRegistration.formSubmitted === true || selfRegistration.createUserForm.$invalid };"
+        value="{{selfRegistration.formSubmitted ? 'Please wait...' : 'Submit'}}"
+        data-ng-submit="selfRegistration.accoutCreate()"
+        />
+      </li>
+    </ul>
+  </fieldset>
+</form>

@@ -1,0 +1,207 @@
+/*=====================================================
+
+  select2 dropdowns
+
+  ======================================================*/
+
+.select2-container {
+  font-family: $omnes-med;
+  font-size: 13px;
+  height: auto;
+  @include box-shadow (none);
+  & * {
+    font-family: $omnes-med !important;
+    font-size: 13px;
+    letter-spacing: 0.300000011920929px;
+  }
+
+  .select2-choice {
+    background-color: $white;
+    background-image: none;
+    border: 1px solid $dropdown-border;
+    cursor: pointer;
+    height: 31px;
+    padding: 6px 18px 0 5px;
+    transition: border-color .5s;
+    @include border-radius(5px);
+    @include box-shadow(none);
+    span {
+      font-family: $omnes-med;
+      color: $modern-plum;
+      bottom: 0;
+      line-height: 1.3em;
+      .select2-chosen {
+        border: none;
+      }
+    }
+    .select2-arrow {
+      border-left: 0;
+      height: 31px;
+      width: 19px;
+    }
+    .select2-arrow b {
+      border-left: 0;
+      background: $dropdown-background-selected url(../images/dk_arrow.fw.png) no-repeat scroll 5px 10px !important;
+      height: 31px;
+      width: 19px;
+      right: -10px;
+    }
+    &.select2-default {
+      span {
+        color: $modern-plum-light;
+      }
+    }
+  }
+  .select2-default {
+    .select2-chosen {
+      background: $white;
+    }
+  }
+  .select2-drop {
+    @include border-radius(2px);
+  }
+  .select2-drop-active {
+    border: 1px solid $dropdown-border;
+    @include border-radius(5px);
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+  }
+}
+.select2-container-active .select2-choice, .select2-container-active .select2-choices {
+  /* border-top: none; */
+}
+.select2-container-disabled {
+  @include opacity(0.35);
+}
+.select2-default {
+  color: $modern-plum-light !important;
+}
+.select2-dropdown-open {
+  .select2-choice {
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+  }
+}
+.select2-display-none {
+  box-shadow: none;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+}
+.select2-results {
+  margin: 0;
+  padding: 0;
+}
+.select2-results .select2-highlighted {
+  background-color: $dropdown-hover;
+  div {
+    color: $white;
+  }
+}
+.select2-results .select2-highlighted:first-child {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.select2-results .select2-highlighted:last-child {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.select2-result-label {
+    border-top: 1px solid #b9b1a9;
+}
+.select2-result-single {
+  margin-bottom: 0;
+}
+.ui-select-choices-group-label {
+  background: $dropdown-background-selected;
+}
+li.ui-select-choices-group {
+  padding-bottom: 0;
+}
+.column {
+  .ui-select-container {
+    width: 100%;
+  }
+}
+
+/*=====================================================
+
+  select2 with search box
+
+  ======================================================*/
+
+[search-enabled = "true"],
+[data-search-enabled = "true"] {
+  .select2-with-searchbox {
+    .ui-select-search {
+
+    }
+    &.select2-drop-active {
+      //border: 0 none;
+    }
+  }
+}
+
+.select2-search {
+  padding: 0;
+}
+
+.ui-select-search {
+  border: 0 none;
+}
+
+.select2-input {
+  border: 0 none !important;
+}
+
+.ui-select-highlight {
+  font-family: $omnes-bold !important;
+}
+
+.select2-highlighted {
+  .ui-select-highlight {
+    color: #fff;
+  }
+}
+
+.select2-results {
+  .select2-highlighted {
+    &:first-child {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+    &.select2-disabled {
+      background: $white;
+      color: $warm-brown;
+      div {
+        background: $white;
+        color: $warm-brown;
+        cursor: default;
+      }
+      .ui-select-highlight { 
+        color: $warm-brown;
+      }
+    }
+  }
+  .select2-disabled {
+    background: $white;
+  }
+}
+
+.ui-select-choices-row {
+  &.select2-disabled {
+    .ui-select-choices-row-inner {
+      > div {
+        @include opacity(0.35);
+      }
+    }
+  }
+}
+
+.select2-results .select2-disabled.select2-highlighted {
+  color: #666;
+  background: #f4f4f4;
+  display: list-item;
+  cursor: default;
+}

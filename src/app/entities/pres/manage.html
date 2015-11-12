@@ -1,0 +1,68 @@
+
+<p class="navigate navigate-back" data-ng-if="rsApp.showReturnToSearch()"><a href="" bindonce class="return-to-search" data-ng-click="preManage.returnToSearch()" data-bo-text="rsApp.returnToSearch"></a></p>
+
+<p class="required-message">Required fields are marked with</p>
+
+<form id="manage-pre-form" name="preManage.managePreForm" watch-form="preManage.checkState()" novalidate data-ng-submit="preManage.formSubmitted || preManage.showCreate ? preManage.create() : preManage.update()">
+  <ul class="form-columns form-create-pre">
+    <li class="row" data-ng-class="{ 'hide-errors': preManage.managePreFormData.pre.hideErrors($event), 'show-required': preManage.managePreFormData.pre.showRequired, 'show-invalid': preManage.managePreFormData.pre.showInvalid };">
+      <label for="pre-search-input" class="required column col1">Provider entity name</label>
+      <div class="column col2" data-is-required="required" data-type-ahead data-no-select data-on-blur="preManage.managePreFormData.pre.checkValidity($event)" data-min-chars="{{preManage.typeaheadMinChars}}" data-input-id="pre-search-input" data-items="preManage.pres.list" data-title="name" data-subtitle="id" data-output="preManage.pres.selected.name" data-model="preManage.pres.selected.name" data-input-name="preName" data-show-invalid="preManage.pres.selected.showInvalid" data-on-type-ahead="preManage.onPreTypeAhead($event)" data-suppress-subtitle data-ignore-case></div>
+      <div class="errors column col3">
+        <span class="presubmit-error required">This field is required.</span>
+        <span class="presubmit-error invalid">Must be a unique name.</span>
+      </div>
+    </li>
+    <li class="row">
+      <label for="hs-select" class="required column col1">Health system</label>
+      <ui-select class="column col2" id="hs-select" name="hsSelect" data-ng-disabled="preManage.healthsystems.list.length === 0 || !preManage.healthsystems.list" data-ng-model="preManage.healthsystems.selected" theme="select2" search-enabled="false" title="Health system" data-on-select="preManage.onHsSelect($item, $model);">
+        <ui-select-match placeholder="--Select--">{{$select.selected.populateHs ? $select.selected.placeholder : $select.selected.name}}</ui-select-match>
+        <ui-select-choices repeat="hs in preManage.healthsystems.list | filter: $select.search">
+          <div data-ng-bind-html="hs.populateHs ? hs.placeholder : hs.name | highlight: $select.search"></div>
+        </ui-select-choices>
+      </ui-select>
+    </li>
+    <li class="row" data-ng-show="preManage.showHsInput" ng-class="{ 'hide-errors': preManage.managePreFormData.hsName.hideErrors($event), 'show-required': preManage.managePreFormData.hsName.showRequired, 'show-invalid': preManage.managePreFormData.hsName.showInvalid };">
+      <label for="hs-name" class="required column col1">Health system name</label>
+      <input class="column col2" type="text" id="hs-name" name="hsName" data-ng-blur="preManage.managePreFormData.hsName.checkValidity($event)" data-ng-model="preManage.healthsystems.selected.name" data-ng-required="true" />
+      <div class="errors column col3">
+        <span class="presubmit-error required">This field is required.</span>
+        <span class="presubmit-error invalid">Must be a new health system name.</span>
+      </div>
+    </li>
+    <li class="row">
+      <label class="column col1 required" data-ng-class="{ 'label-table' : preManage.tins.selectedArray.length > 1 }">TIN/Group</label>
+      <div class="column col2" data-ng-class="{ 'span2' : preManage.tins.selectedArray.length > 0 }">
+        <table data-ng-if="preManage.tins.selectedArray.length > 0" class="table-no-border table-no-wrap table-fixed" id="tin-pre-assoc-table" >
+          <tbody>
+            <tr data-ng-repeat="tin in preManage.tins.selectedArray track by $index" data-ng-class="{ 'row-multiple' : preManage.tins.selectedArray.length > 1 }" data-ng-class-odd="'odd'" data-ng-class-odd="'odd'" data-ng-class-even="'even'">
+              <td class="cell-align-left with-pre-name">
+                <a class="ui-corner-all ui-clearrow ui-clear" role="button" data-ng-if="!tin.assocId" data-ng-click="preManage.tins.removeTin(tin.tin);">
+                  <span class="ui-icon ui-icon-closethick">
+                  </span>
+                </a>
+                <a href="" data-ng-bind="tin.name ? tin.tin + ' - ' + tin.name : tin.tin" data-ng-click="preManage.editTin(tin.id)"></a>
+              </td>
+              <td class="with-date-range cell-align-right">
+                <span class="output-date-range" name="tinPreAssocBegin" data-ng-bind="tin.effDate | date : 'MM/dd/yyyy'"></span>
+                <span data-ng-if="tin.effDate.length > 0 || tin.endDate.length > 0">to</span>
+                <span class="output-date-range" name="tinPreAssocEnd" data-ng-bind="tin.endDate  | date : 'MM/dd/yyyy'"></span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <data-ng-include src="preManage.tinInputPartial" data-ng-if="preManage.tins.selectedArray.length === 0"></data-ng-include>
+      </div>
+      <div class="column col3 with-date-range" data-ng-include="preManage.tinInputDateRangePartial" data-ng-if="preManage.tins.selectedArray.length === 0 && preManage.enableTinInputDates"></div>
+    </li>
+    <li class="row" data-ng-if="preManage.tins.selectedArray.length > 0">
+      <span class="column col1"></span>
+      <div data-ng-include class="column col2" src="preManage.tinInputPartial"></div>
+      <div class="column col3 with-date-range" data-ng-include="preManage.tinInputDateRangePartial" data-ng-if="preManage.enableTinInputDates"></div>
+    </li>
+    <li class="row">
+      <span class="column col1"></span>
+      <input class="column col2 button button-submit data-ng-class:{'disabled': preManage.tins.selectedArray.length === 0 || preManage.managePreForm.$invalid || preManage.managePreForm.$pristine || preManage.managePreFormData.formReverted }" type="submit" id="manage-pre-submit" name="managePreSubmit" value="{{preManage.showCreate ? 'Create PRE' : 'Update PRE'}}" data-ng-disabled="preManage.tins.selectedArray.length === 0 || preManage.managePreForm.$invalid || preManage.managePreForm.$pristine || preManage.managePreFormData.formReverted" />
+    </li>
+  </ul>
+</form>

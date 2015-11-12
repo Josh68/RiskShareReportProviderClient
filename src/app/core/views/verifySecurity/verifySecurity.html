@@ -1,0 +1,34 @@
+
+<form novalidate
+	data-ng-show="verifySecurity.question && !verifySecurity.validationFinished"
+	class="" ng-submit="verifySecurity.verifyQuestion()"
+	name="verifySecurity.verifyUserQuestionForm" data-ng-bind-attrs="{id: verifySecurity.verifySecurityFormId}">
+	<fieldset class="forms">
+		<ul class="profile-form form">
+			<li class="form-row">
+				<label class="column col1" for="question">Question:</label>
+				<input
+				class="column col2 rs-input input-password ui-inputfield ui-inputtext"
+				ng-readonly="true" id="security-question" name="question"
+				type="text" autocomplete="off" required
+				ng-model="verifySecurity.question" maxlength="50" />
+			</li>
+			<li class="form-row">
+				<label class="column col1" for="answer">Answer:</label>
+				<input
+				class="column col2 rs-input input-password ui-inputfield ui-inputtext"
+				id="security-answer" name="answer" type="text" autocomplete="off"
+				required ng-model="verifySecurity.answer" placeholder="required"
+				maxlength="50" />
+			</li>
+			<li class="form-row">
+				<label class="column col1"></label> 
+				<input
+				type="submit"
+				class="column col2 button button-submit data-ng-class:{ 'disabled': verifySecurity.verifyUserQuestionForm.$invalid || verifySecurity.verifyUserQuestionForm.$pristine}"
+				ng-class="{'disabled': verifySecurity.formSubmitted}"
+				value="{{verifySecurity.formSubmitted ? 'Please wait...' : 'Answer'}}" />
+			</li>
+		</ul>
+	</fieldset>
+</form>

@@ -1,0 +1,56 @@
+#nav-main { //the container
+
+}
+.home .nav-main {
+  display: none; //don't show the nav on splitter/home page
+}
+.nav-main { //the nav itself
+  font-size: 1.14285714em; //16/14 - not handled by our modular scale
+  @include rem(margin-bottom, 20px);
+  .nav-items {
+    text-align: right;
+  }
+  .nav-item {
+    background-color: $menu-default;
+    font-family: $omnes-med;
+    padding-bottom: 0;
+    @include border-radius(0 5px 5px 0);
+    + .nav-item {
+      margin-top: 1px;
+    }
+    &:hover, &:active {
+      cursor: pointer;
+    }
+    &.current {
+      background-color: $menu-current;
+    }
+    &.single-role {
+      &.menu-home {
+        display: none !important;
+      }
+    }
+    &.disabled {
+      background-color: $button-disabled;
+      & > .nav-item-link {
+        &:hover {
+          cursor: default;
+          color: #fff;
+          text-decoration: none;
+          background-color: $button-disabled;
+        }
+      }
+    }
+  }
+  .nav-item-link {
+    color: #fff;
+    display: block;
+    height: 100%;
+    outline: 0;
+    width: 100%;
+    @include rem(padding, 12px 10px 12px 20px);
+    &:hover {
+      color: $modern-yellow;
+    }
+  }
+}
+

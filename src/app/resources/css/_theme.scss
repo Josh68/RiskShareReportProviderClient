@@ -1,0 +1,100 @@
+/*=====================================================
+
+  Base font settings and Gumby overrides
+
+  ======================================================*/
+
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+body, p, h4 {
+  font-family: $omnes-reg;
+}
+
+body, p, h2, h4 {
+    color: $warm-brown;
+}
+
+h1, h2, a, strong {
+  font-family: $omnes-med;
+}
+
+h1, a {
+    color: $modern-plum;
+}
+
+h3 {
+    color: $modern-aqua;
+    font-family: $omnes-med-ital;
+}
+
+h4 {
+    text-transform: uppercase;
+}
+
+h1, h2, h3, h4 {
+  line-height: 1;
+}
+
+h2 {
+  margin-top: 0;
+  font-size: em(18px);
+}
+
+h3 {
+  font-size: em(15px);
+  font-family: $omnes-med-ital;
+  color: $modern-aqua;
+}
+
+h4 {
+  font-size: em(13px);
+  text-transform: uppercase;
+}
+
+a {
+  text-decoration: none;
+  &:hover, &:active {
+    text-decoration: underline;
+    cursor: pointer;
+    color: $modern-plum;
+  }
+}
+
+/**
+*
+* Font-sizes, gumby-style
+*
+**/
+
+h1 {
+  //font-size: em(22px);
+}
+
+h1 {
+    @include font-size($xxlarge);
+}
+h2 {
+  @include font-size($larger);
+}
+h3 { @include font-size($med); }
+h4 { @include font-size($small); }
+h5 { @include font-size($small); }
+
+.disclaimer, .small {
+  font-size: em(12px);
+}
+
+/*=====================================================
+
+  Module-specific stuff should be moved to separate theme files?
+
+  ======================================================*/
+
+#navbar-main-nav {
+	background-color: transparent;
+}
+#main-nav {
+    background-color: $navutil-bg;
+}

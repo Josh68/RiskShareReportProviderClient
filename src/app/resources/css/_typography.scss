@@ -1,0 +1,93 @@
+/* Typography */
+
+h1,h2,h3,h4,h5,h6 {
+  text-rendering: optimizeLegibility;
+  @include padding-leader($rhythm-spacing);
+  @include adjust-leading-to($rhythm-height);
+  @include padding-trailer($rhythm-spacing);
+}
+
+h1 {
+  color: $modern-plum;
+  @include font-size($xxxlarge);
+  &.xlarge {
+    @include font-size($reallybig);
+  }
+  &.xxlarge {
+    @include font-size($tremendous);
+  }
+  &.absurd {
+    @include font-size($absurd);
+  }
+}
+h2 { @include font-size($larger); }
+h3 { @include font-size($med);}
+h4 { @include font-size($norm);}
+h5 { @include font-size($small);}
+h6 { @include font-size($xsmall);}
+
+h1,
+h2 {
+  font-family: $omnes-med;
+}
+
+h3 {
+  color: $modern-aqua;
+  font-family: $omnes-med-ital;
+}
+
+h4 {
+  text-transform: uppercase;
+}
+
+
+/*=====================================================
+
+  Links & Paragraph styles
+
+  ======================================================*/
+
+p {
+  @include font-size($base-font-size);
+  margin-bottom: $base-line-height / 2;
+  @include adjust-leading-to(1);
+  &.lead {
+    @include font-size(ms(0) * 1.25);
+    margin-bottom: ms(1);
+  }
+}
+
+a {
+  line-height: inherit;
+}
+
+/*=====================================================
+
+  Lists
+
+ ======================================================*/
+
+ul, ol {
+  @include margin-trailer($rhythm-spacing);
+}
+
+ul {
+  list-style: none outside;
+}
+
+ol {
+  list-style: decimal;
+  margin-left: 30px;
+}
+
+li {
+  @include padding-trailer($rhythm-spacing);
+}
+
+ul.large li {
+  line-height: 21px;
+}
+
+dl dt {
+  @include font-size($norm);
+}

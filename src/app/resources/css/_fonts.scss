@@ -1,0 +1,19 @@
+/*=====================================================
+
+  Moda @Font-face fonts
+
+  ======================================================*/
+
+//font paths defined per task in grunt compass config
+
+@include font-face("omnes_ods_mediumregular", font-files("omnesods_medium-roman-webfont.woff", "omnesods_medium-roman-webfont.ttf", "omnesods_medium-roman-webfont.svg"), "omnesods_medium-roman-webfont.eot", true, true);
+@include font-face("omnes_ods_regularregular", font-files("omnesods_regular-roman-webfont.woff", "omnesods_regular-roman-webfont.ttf", "omnesods_regular-roman-webfont.svg"), "omnesods_regular-roman-webfont.eot", true, true);
+@include font-face("omnes_ods_semiregular", font-files("omnesods_semibold-roman-webfont.woff", "omnesods_semibold-roman-webfont.ttf", "omnesods_semibold-roman-webfont.svg"), "omnesods_semibold-roman-webfont.eot", true, true);
+@include font-face("omnes_ods_boldregular", font-files("omnesods_bold-roman-webfont.woff", "omnesods_bold-roman-webfont.ttf", "omnesods_bold-roman-webfont.svg"), "omnesods_bold-roman-webfont.eot", true, true);
+@include font-face("omnes_ods_lightregular", font-files("omnesods_light-roman-webfont.woff", "omnesods_light-roman-webfont.ttf", "omnesods_light-roman-webfont.svg"), "omnesods_light-roman-webfont.eot", true, true);
+
+@include font-face("omnes_ods_mediumitalic", font-files("omnesods_medium-italic-webfont.woff", "omnesods_medium-italic-webfont.ttf", "omnesods_medium-italic-webfont.svg"), "omnesods_medium-italic-webfont.eot", true, true);
+@include font-face("omnes_ods_regularitalic", font-files("omnesods_regular-italic-webfont.woff", "omnesods_regular-italic-webfont.ttf", "omnesods_regular-italic-webfont.svg"), "omnesods_regular-italic-webfont.eot", true, true);
+@include font-face("omnes_ods_semiitalic", font-files("omnesods_semibold-italic-webfont.woff", "omnesods_semibold-italic-webfont.ttf", "omnesods_semibold-italic-webfont.svg"), "omnesods_semibold-italic-webfont.eot", true, true);
+@include font-face("omnes_ods_bolditalic", font-files("omnesods_bold-italic-webfont.woff", "omnesods_bold-italic-webfont.ttf", "omnesods_bold-italic-webfont.svg"), "omnesods_bold-italic-webfont.eot", true, true);
+@include font-face("omnes_ods_lightitalic", font-files("omnesods_light-italic-webfont.woff", "omnesods_light-italic-webfont.ttf", "omnesods_light-italic-webfont.svg"), "omnesods_light-italic-webfont.eot", true, true);

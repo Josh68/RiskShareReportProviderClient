@@ -1,0 +1,128 @@
+// Your custom variable SCSS should be written here...
+$row-max-width: 940px !default;           // 940px with both gutters (960 would include both layout bars)
+// Modular Scale Settings
+// http://www.modularscale.com by Tim Brown
+// https://github.com/scottkellum/modular-scale
+$ms-ratio: $minor-third;            // Ratio for Modular Scale
+$base-font-size: 14px !default;
+$importantNum: 22px !default;
+$ms-base: $base-font-size $importantNum;
+// Testing new scale, which is (going out 10): 14, 15, 17, 18, 20, 22, 24, 26, 29, 32
+
+// Sizing
+$xsmall: ms(-2);
+$small: ms(-1);
+$norm: ms(0);                 // $base-font-size (14px == default)
+$med: ms(1);
+$large: ms(2);
+$larger: ms(3);
+$xlarge: ms(4);
+$xxlarge: ms(5);
+$xxxlarge: ms(6);
+$reallybig: ms(8);
+$tremendous: ms(9);
+$absurd: ms(10);
+
+// Vertical Rhythm Spacing
+$base-line-height: 17px !default;  //was 26 (1.5 * 16). this approximates 14 * 1.2 line-height, and seems bad, overall
+$rhythm-spacing: .168; //unchanged
+$rhythm-height: .711; //unchanged
+
+//font shorthand
+
+$omnes-reg: omnes_ods_regularregular, Verdana, sans-serif;
+$omnes-med: omnes_ods_mediumregular, Verdana, sans-serif;
+$omnes-semi: omnes_ods_semiregular, Verdana, sans-serif;
+$omnes-ital: omnes_ods_regularitalic, Verdana, sans-serif;
+$omnes-med-ital: omnes_ods_mediumitalic, Verdana, sans-serif;
+$omnes-semi-ital: omnes_ods_semiitalic, Verdana, sans-serif;
+$omnes-bold: omnes_ods_boldregular, Verdana, sans-serif;
+$omnes-bold-ital: omnes_ods_bolditalic, Verdana, sans-serif;
+
+//colors
+
+//base
+$modern-plum: #a50069;
+$modern-plum-light: tint($modern_plum, 50%); //#d27fb4
+$light-plum: #f6e6f0;
+$warm-brown: #493b31;
+$warm-brown-light: tint($warm_brown, 50%); //#a49d98
+$modern-yellow: #ffe92c;
+$modern-yellow-light: lighten($modern_yellow, 14.2%); //#fff174
+$modern-aqua: #0c9c9e;
+$button-aqua: #7accc4;
+$button-aqua-hover: #0c9c9e;
+$modern-aqua-light: #e3f2f0; //not sure what the forumula is - might require blend modes
+$dark-aqua: #0e5952;
+$lighter-yellow: #fef9ce; //not sure what the formula is - might require blend modes
+
+
+//menu
+$menu-current: #c25f92;
+$menu-default: #b80175;
+//$button-disabled is also menu-disabled
+
+//objects
+$copyright: #cb74a0;
+$editpane-bg: #f0edeb;
+$navutil-bg: #6E5D52;
+
+//buttons
+$button-aqua: #7accc4;
+$button-aqua-hover: #0c9c9e;
+$button-box-border: #b9b1a9;
+$button-hover: mix($modern_plum, #050305, 60%);
+$button-disabled: #e0a6cb;
+$prim-btn-bg-tap: #650141;
+$inact-prim-btn-bg: #e1abce;
+$sec-btn-bg: #f2d9e9;
+$sec-btn-disabled-border: #d6d2cf;
+$secondary-button-border: #b9b1a9;
+
+//inputs
+$placeholder: #a39c97;
+
+//messages background colors
+$success-bg: #e3f2f0;
+
+//tables
+$zebra-stripe: #e3ddda;
+$table-borders: #f0edeb; //until we hear otherwise, this is not one of our latest aquas, and may be deprecated
+$table-headers: #d7d1cd;
+
+//tabs
+$tab-background-unselected: $table-borders;
+//$tab-border: #dad3ce;
+$tab-borders: $table-borders;
+
+//dropdowns
+$dropdown-hover: #650141;
+$dropdown-background-selected: #e2e0de;
+$dropdown-border: #c4b5af;
+
+//text
+$default-text-shadow-color: rgba(black, 1);
+$default-text-shadow-blur: 1px;
+$default-text-shadow-v-offset: 1px;
+$default-text-bottom-margin: 0.75em;
+
+//dialogs
+$dialog-border-color: #b0006e;
+
+//DIMENSIONS
+
+// header/logo
+$logo-width: 145px;
+$logo-horiz-margin: 46px;
+$logo-vert-margin: 50px;
+
+// navutil
+
+// navmain / content
+$nav-main-width: 194px;
+$content-offset: $logo-width + ($logo-horiz-margin * 2);
+$content-margin-right: 20px;
+$content-width: $row-max-width - $content-offset - $content-margin-right;
+
+$white: #fff;
+$black: #000;

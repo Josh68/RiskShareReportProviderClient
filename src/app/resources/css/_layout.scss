@@ -1,0 +1,91 @@
+// Your custom layout SCSS should be written here. It defines the overall page structure.
+@import "compass/layout/sticky-footer";
+@import "compass/utilities/general/clearfix";
+
+@include sticky-footer(30px, "#pagewrap", "#layout-footer", "#footer");
+
+
+//Compass sticky footer mixin
+
+/* ==========================================================================
+  Page nav/content layout (rows and columns)
+   ========================================================================== */
+html, body {
+  height: 101%;
+}
+body.prevent-body-scroll { //disable body scroll when dialog is open
+    overfow: hidden !important;
+}
+body{
+    padding: 0;
+    background: image-url("body_bg.gif") repeat-y scroll 50% 0 rgba(0, 0, 0, 0);
+}
+#pagewrap {
+    margin: 0 auto;
+    //height: 100%;
+    #layout-footer {
+        margin-top: 30px; //works with the sticky footer and gives top margin while keeping the footer in view when content is less than viewport height
+    }
+}
+.container-branding {
+  @include clearfix;
+}
+.container-branding,
+.container-main {
+  //@include clearfix;
+}
+#content,
+#footer {
+  @include rem(margin-left, ($logo-width  + ($logo-horiz-margin * 2)));
+  @include rem(margin-right, $content-margin-right);
+}
+#subhead {
+  position: relative;
+  @include clearfix;
+  @include rem(padding, 10px 0);
+}
+h1.heading-page {
+  @include rem(margin, 0 0 0 $logo-width  + ($logo-horiz-margin * 2));
+  .login & {
+    margin-left: 0;
+  }
+}
+#footer {
+  @include rem(margin-top, 30px);
+  @include font-size($xsmall);
+  * {
+    @include font-size($xsmall);
+  }
+  //@include rem(margin, -30px auto 0 );
+  //@include rem(padding, 0 20px 0 $content-offset);
+}
+#footer-content {
+    //@include rem(margin-top, -30px);
+}
+#pagewrap {
+    width: $row-max-width; //makin' it fixed!
+}
+#page {
+    @include rem(margin, 0 20px);
+    position: relative;
+}
+#nav-main {
+  @include rem(width, $nav-main-width);
+  float: left;
+}
+#content {
+    .row {
+        padding: 0;
+    }
+    & > *:last-child {
+        margin-bottom: 0 !important; //attempt to control last element bottom margin
+        & > *:last-child {
+            margin-bottom: 0 !important;
+            & > *:last-child {
+                margin-bottom: 0 !important;
+            }
+        }
+    }
+    @include rem(min-height, 385px);
+}
+

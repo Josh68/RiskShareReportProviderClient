@@ -1,0 +1,99 @@
+ 
+<p class="required-message form-key">Required fields are marked with</p>
+
+<a id="link-download-all" data-ng-href="{{entitySearch.downloadUrl}}{{rsApp.token}}" data-ng-click="rsApp.reauth()"  target="_blank">Download all (CSV)</a>
+
+<form novalidate watch-form="entitySearch.checkState()" data-ng-submit="entitySearch.formSubmitted || entitySearch.submit()" id="search-entity-form" name="entitySearch.searchForm">
+  <ul class="form-columns search-entity">
+    <li class="row">
+      <label for="entity-type-select" class="column col1 required">Type</label>
+      <!--because the select doesn't use isolate scope, must define input name in the controller on the passed-in $scope-->
+		  <ui-select id="entity-type-select" data-input-name="entityTypeSelect" data-ng-required data-ng-model="entitySearch.searchFormData.entityType.selected" theme="select2" search-enabled="false" class="list-entity-type column col2" data-on-select="entitySearch.onEntityTypeSelect($item, $model)">
+        <ui-select-match placeholder="--Select--">{{$select.selected.name}}</ui-select-match>
+        <ui-select-choices repeat="item in entitySearch.selectableEntityTypes | filter: $select.search">
+				  <div data-ng-bind-html="item.name | highlight: $select.search"></div>
+  		  </ui-select-choices>
+      </ui-select>
+    </li>
+    <li class="row">
+      <label for="entity-search-term" class="column col1">Search term</label>
+      <input type="text" id="entity-search-term" name="entitySearchTerm" data-ng-model="entitySearch.searchFormData.searchTerm" class="column col2" />
+    </li>
+    <li class="row entity-search-status">
+      <label for="entity-search-status" class="column col1 label-tooltip">Status<span class="tooltip tooltip-right tooltip-standard" ui-jq="tipso" ui-options="{{rsApp.tipsoConfig}}" title="'Active', applies only to TIN/Group and Health Systems; 'Inactive' are those that have been deactivated."></span></label>
+      <fieldset class="column col2 prettycheckable-inline" id="entity-search-status">
+        <!-- <legend>Report type</legend> -->
+        <pretty-radio data-ng-disabled="entitySearch.searchFormData.entityType.selected.code === 'pres'" data-ng-model="entitySearch.searchFormData.statusFilter" value="''" label="false">
+            <label>All</label>
+        </pretty-radio>
+        <pretty-radio data-ng-disabled="entitySearch.searchFormData.entityType.selected.code === 'pres'" data-ng-model="entitySearch.searchFormData.statusFilter" value="'true'" label="false">
+            <label>Active</label>
+        </pretty-radio>
+        <pretty-radio data-ng-disabled="entitySearch.searchFormData.entityType.selected.code === 'pres'" data-ng-model="entitySearch.searchFormData.statusFilter" value="'false'" label="false">
+            <label>Inactive</label>
+        </pretty-radio>
+      </fieldset>
+    </li>
+
+    <li class="row entity-search-associated">
+      <label for="entity-search-associated" class="column col1 label-tooltip">Associated<span class="tooltip tooltip-right tooltip-standard" ui-jq="tipso" ui-options="{{rsApp.tipsoConfig}}" title="'Has associations' denotes those with current and future associations. For TIN/Groups and Health Systems, applies to those with a PRE association.  ‘No associations’ denotes no current or future association to a PRE.  For 'PRE' search, applies to those with a TIN association."></span></label>
+      <fieldset class="column col2 prettycheckable-inline" id="entity-search-associated">
+        <!-- <legend>Report type</legend> -->
+        <pretty-radio data-ng-model="entitySearch.searchFormData.associatedFilter" value="''" label="false">
+            <label>All</label>
+        </pretty-radio>
+        <pretty-radio data-ng-model="entitySearch.searchFormData.associatedFilter" value="'true'" label="false">
+            <label>Has associations</label>
+        </pretty-radio>
+        <pretty-radio data-ng-model="entitySearch.searchFormData.associatedFilter" value="'false'" label="false">
+            <label>No associations</label>
+        </pretty-radio>
+      </fieldset>
+    </li>
+
+    <li class="row">
+      <span class="column col1"></span>
+      <input class="column col2 button button-submit data-ng-class:{ 'disabled': entitySearch.searchForm.$invalid || !entitySearch.formRequiredSet || entitySearch.formSubmitted }" type="submit" value="Search" data-ng-disabled="entitySearch.searchForm.$invalid || !entitySearch.formRequiredSet || entitySearch.formSubmitted" />
+    </li>
+  </ul>
+</form>
+
+<div id="infoMessages" class="ui-messages ui-messages-info ui-widget" role="status" aria-live="polite" data-ng-show="entitySearch.showNoResults">
+  <div class="ui-messages-info-content ui-corner-all">
+    <span class="ui-messages-icon ui-messages-icon-info"></span>
+    <ul class="ui-messages-list ui-messages-list-info">
+      <li class="ui-messages-item ui-messages-item-info">
+        <span class="ui-messages-detail ui-messages-detail-info">Sorry, no results were found.</span>
+      </li>
+    </ul>
+  </div>
+</div>
+<table id="entity-search-results" data-ng-show="entitySearch.viewResultsTable" class="reports-list">
+  <caption class="caption-plain" data-ng-bind="entitySearch.resultsTable.recordsFound + ' records found'"></caption>
+  <thead>
+    <tr>
+      <th data-ng-repeat="column in entitySearch.resultsTable.columns" data-ng-bind="column.header"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr dir-paginate="entityItem in entitySearch.resultsTable.items | itemsPerPage: pageSize" pagination-id="entitiesPagination">
+      <td ng-if="!entitySearch.resultsTable.isHs" data-ng-repeat="column in entitySearch.resultsTable.columns">
+        <span data-ng-repeat="object in column.details" data-ng-if="entityItem[object.active] === false" class="tooltip tooltip-left tooltip-deactivated" ui-jq="tipso" ui-options="{{rsApp.tipsoConfig}}" title="Inactive TIN: TIN is not participating in the Risk Share model and is NOT available for association to a PRE that is participating in the Risk Share model."></span>
+        <a href="" data-ng-repeat="object in column.details" data-ng-click="entitySearch.editResult(entityItem[object.url])" data-ng-bind="entityItem[object.name]"></a>
+      </td>
+      <td ng-if="entitySearch.resultsTable.isHs">
+        <a href="" data-ng-click="entitySearch.editResult(entityItem[entitySearch.resultsTable.columns[0].details[0].url])" data-ng-bind="entityItem[entitySearch.resultsTable.columns[0].details[0].name]" data-ng-class="{'deactivated': entityItem[object.active] === false}"></a>
+      </td>
+      <td ng-if="entitySearch.resultsTable.isHs">
+        <ul>
+          <li data-ng-repeat="preObject in entitySearch.resultsTable.columns[1].details[$index]"> <!--$index here refers to the iterated entityItem -->
+            <a href="" data-ng-click="entitySearch.editResult(preObject.url)" data-ng-bind="preObject.name"></a> 
+          </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div class="container-buttons">
+	<dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="entities/dirPagination.tpl.html" pagination-id="entitiesPagination"></dir-pagination-controls>
+</div>

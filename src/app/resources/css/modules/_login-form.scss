@@ -1,0 +1,21 @@
+.form-login {
+  border: 1px solid $button-box-border;
+  @include border-radius(5px);
+  @include rem(padding, 15px);
+  @include rem(width, 200px);
+  .heading {
+    @include rem(margin-bottom, 5px);
+  }
+  input[type="text"],
+  input[type="password"] {
+    box-sizing: border-box;
+    @include rem(height, 22px);
+    margin: 0;
+    @include rem(padding, 0 0 0 5px);
+    width: 100%;
+  }
+  label {
+    text-transform: uppercase;
+    @include font-size($small);
+  }
+}

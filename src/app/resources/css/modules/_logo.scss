@@ -1,0 +1,23 @@
+/* ==========================================================================
+  Logo
+   ========================================================================== */
+
+#logo-main {
+    float: left;
+    height: auto;
+    line-height: 0; //forces the image wrappers to hug the image
+    @include rem(margin, $logo-vert-margin $logo-horiz-margin 0);
+    @include rem(width, $logo-width);
+    a {
+        line-height: 0; //forces the image wrappers to hug the image
+        @include rem(margin, ($logo-vert-margin - 1px) ($logo-horiz-margin - 1px));
+        text-align: center;
+        display: block;
+        img {
+            //@include rem(width, 147px);
+            max-height: 100%;
+            max-width: 100%;
+            padding: 1px; //hack to keep FF from cutting off artboard-sized graphics (with no surrounding whitespace, like logos). Margins, etc, may need to be adjusted accordingly
+        }
+    }
+}

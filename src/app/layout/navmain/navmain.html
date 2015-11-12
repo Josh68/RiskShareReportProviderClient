@@ -1,0 +1,14 @@
+<nav class="nav nav-main" data-ng-show="navmain.navReady">
+  <ul class="nav-items" ng-if="!rsApp.disable">
+    <li bindonce class="nav-item ng-class:{'disabled': rsApp.disable, 'current': item.activeNavItem, 'menu-home': item.addClass.home, 'single-role': item.addClass.singleuserrole, 'provider-contact': item.addClass.contact, 'reports-admin': item.addClass.reportadmin, 'internal-viewer': item.addClass.viewer, 'entity-admin': item.addClass.entityadmin};" ng-repeat="item in navmain.menuNavMain | orderBy: 'num' ">
+      <a class="nav-item-link" bo-href="item.path" bo-text="item.title"></a>
+    </li>
+  </ul>
+  <ul class="nav-items" ng-if="rsApp.disable">
+    <li bindonce class="nav-item ng-class:{'disabled': rsApp.disable, 'current': item.activeNavItem, 'menu-home': item.addClass.home, 'single-role': item.addClass.singleuserrole, 'provider-contact': item.addClass.contact, 'reports-admin': item.addClass.reportadmin, 'internal-viewer': item.addClass.viewer, 'entity-admin': item.addClass.entityadmin};" ng-repeat="item in navmain.menuNavMain | orderBy: 'num' ">
+      <span class="nav-item-link" bo-text="item.title"></span>
+    </li>
+  </ul>
+</nav>
+
+

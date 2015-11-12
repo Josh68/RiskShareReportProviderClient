@@ -1,0 +1,46 @@
+ /* ==========================================================================
+  Preformatted code blocks
+   ========================================================================== */
+li.L0, li.L1, li.L2, li.L3,
+li.L5, li.L6, li.L7, li.L8, ol.linenums {
+    font: normal normal 12px/14px "Courier New", Courier, Monospace;
+    color: $warm-brown;
+    list-style-position: inside;
+}
+
+ol.linenums {
+    counter-reset: item -1;
+    list-style-type: none;
+    li {
+        &:before {
+            content: counter(item) " ";
+            counter-increment: item;
+        }
+        &:first-child:before, &:last-child:before {
+            content: '';
+        }
+    }
+}
+
+pre {
+    @include rem(margin-bottom, 20px);
+    &.prettyprint, &.prettyprinted {
+        background-color: #fff;
+        padding: 0 1em !important;
+        overflow-x: hidden;
+        li {
+            overflow-x: hidden;
+        }
+        &:hover {
+            overflow-x: visible;
+            ol, li {
+                width: 100%;
+            }
+        }
+    }
+    code, .line-number {
+        font: normal normal 12px/14px "Courier New", Courier, Monospace;
+        color: $warm-brown;
+    }
+}
+

@@ -1,0 +1,8 @@
+<input type="text" id="{{inputId}}" data-ng-bind-attrs="{name: inputName, disabled: setDisabled, dataNgRequired: isRequired,  dataNgModelOptions: modelOptions }" class="type-ahead-input" data-ng-model="output" data-ng-blur="onBlur()" placeholder="{{prompt}}" />
+
+<ul class="items type-ahead-list type-ahead-selectable" data-ng-hide="!typeAhead.requiredChars || typeAhead.selected || !typeAhead.valid || requiredLengthFilteredItems.length === 0">
+  <li class="item type-ahead-item" data-ng-repeat="item in requiredLengthFilteredItems track by $index" data-ng-click="handleSelection(item)" data-ng-class="{'active': isCurrent($index)}" data-ng-mouseenter="setCurrent($index)">
+    <span class="title type-ahead-title" data-ng-bind="item[title]"></span>
+    <span class="subtitle type-ahead-subtitle" data-ng-show="item[subtitle].toString().length > 0 && !typeAhead.suppressSubtitle" data-ng-bind="' - ' + item[subtitle].toString()"></span>
+  </li>
+</ul>

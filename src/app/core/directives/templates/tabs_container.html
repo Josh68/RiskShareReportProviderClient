@@ -1,0 +1,6 @@
+<ul class="tabs-tab-container">
+  <li data-ng-repeat="tab in tabs" data-ng-click="selectTab($index)" class="tabs-tab ng-class:{'selected': isSelectedTab($index)};">
+    <span class="tabs-tab-header" data-ng-bind="tab.name"></span>
+  </li>
+</ul>
+<div ng-transclude class="tabs-tab-content-area"></div>

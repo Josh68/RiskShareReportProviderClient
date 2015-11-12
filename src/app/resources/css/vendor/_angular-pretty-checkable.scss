@@ -1,0 +1,60 @@
+//overrides for angular-pretty-checkable module
+
+.prettycheckbox {
+  > a {
+    background: image-url("sprite_checkbox.png") no-repeat;
+  }
+}
+
+.prettyradio {
+  > a {
+    background: image-url("sprite_radio.png") no-repeat;
+  }
+}
+
+.prettyradio,
+.prettycheckbox {
+  label {
+    margin: 0 0.5em;
+    font-family: $omnes-med;
+    height: 21px;
+    line-height: 21px;
+  }
+  > a {
+    background-color: #fff;
+    width: 21px;
+    height: 21px;
+    &.checked {
+      background-position: 0 0;
+      &.disabled {
+        background-position: 0 0;
+      }
+    }
+    &.disabled {
+      @include opacity(0.35);
+    }
+  }
+  > a,
+  > a.disabled {
+    background-position: 0px -21px;
+  }
+  .prettycheckable-inline & {
+    display: inline-block;
+  }
+}
+
+.prettycheckable-inline {
+  white-space: nowrap;
+}
+
+td, th {
+  .prettycheckbox, .prettyradio,  {
+    label, a {
+      float: none;
+      display: inline-block;
+      vertical-align: top;
+    }
+  }
+}
+
+

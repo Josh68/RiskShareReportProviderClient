@@ -1,0 +1,30 @@
+<div id="svcAlerts" class="ui-messages ui-messages-error ui-widget" role="alert" aria-live="assertive" ng-show="messages.hasServiceAlert">
+  <div class="ui-messages-error-content ui-corner-all">
+    <span class="ui-messages-icon ui-messages-icon-error"></span>
+    <ul class="ui-messages-list ui-messages-list-error">
+      <li class="ui-messages-item ui-messages-item-error">
+        <span class="ui-messages-detail ui-messages-detail-error">{{messages.serviceAlert}}</span>
+      </li>
+    </ul>
+  </div>
+</div>
+<div id="errorMessages" class="ui-messages ui-messages-error ui-widget" role="alert" aria-live="assertive" ng-show="messages.hasErrorMessages">
+  <div class="ui-messages-error-content ui-corner-all">
+    <span class="ui-messages-icon ui-messages-icon-error"></span>
+    <ul class="ui-messages-list ui-messages-list-error">
+      <li class="ui-messages-item ui-messages-item-error" ng-repeat="errorMsg in messages.errorMessages track by $id(errorMsg)">
+        <span class="ui-messages-detail ui-messages-detail-error">{{errorMsg}}</span>
+      </li>
+    </ul>
+  </div>
+</div>
+<div id="infoMessages" class="ui-messages ui-messages-info ui-widget" role="status" aria-live="polite" ng-show="messages.hasInfoMessages">
+  <div class="ui-messages-info-content ui-corner-all">
+    <span class="ui-messages-icon ui-messages-icon-info"></span>
+    <ul class="ui-messages-list ui-messages-list-info">
+      <li class="ui-messages-item ui-messages-item-info" ng-repeat="infoMsg in messages.infoMessages track by $id(infoMsg)">
+        <span class="ui-messages-detail ui-messages-detail-info">{{infoMsg}}</span>
+      </li>
+    </ul>
+  </div>
+</div>

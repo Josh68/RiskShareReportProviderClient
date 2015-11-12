@@ -1,0 +1,37 @@
+<div class="rs-container container-branding" id="branding">
+<!--[if gt IE 8 | !IE ]><!-->
+  <img id="logo-main" src="resources/images/moda.svg" />
+<!--<![endif]-->
+<!--[if lte IE 8]>
+  <img id="logo-main" src="resources/images/moda.png" />
+<![endif]-->
+  <div class="rs-container container-app-header" id="app-header">
+    <div class="rs-container container-navbar" id="navbar">
+      <div class="app-name" data-bindonce="header.appName">
+        <a href="" data-ng-show="rsApp.isLoggedIn && !rsApp.disable" data-bo-text="header.appName.title" data-ng-click="header.appName.action()"></a><!--TODO: make the link go to the right place according to user role-->
+        <span data-ng-hide="rsApp.isLoggedIn && !rsApp.disable" data-bo-text="header.appName.title"></span>
+      </div>
+      <nav class="nav nav-util">
+        <ul class="nav-items">
+          <li class="nav-item" data-bindonce data-ng-repeat="item in header.menuNavUtil">
+            <a class="nav-item-link" data-bo-href="item.path" data-bo-text="item.title" data-bo-attr data-bo-attr-target="item.target"></a>
+          </li>
+        </ul>
+      </nav>
+    </div> <!-- /containter-navbar -->
+    <nav class="nav nav-logged-in" data-ng-show="rsApp.isLoggedIn">
+      <ul class="nav-items">
+        <li class="nav-item" data-ng-if="!rsApp.disable">
+          <p class="greeting" data-ng-bind="'Welcome, ' + rsApp.user.firstName"></p>
+        </li>
+        <li class="nav-item" data-bindonce data-ng-repeat="item in header.menuLoggedIn" data-ng-if="!(item.disableable && rsApp.disable)" data-ng-hide="!item.showOnHome && header.isHome">
+          <a class="nav-item-link data-ng-class:{'disabled': (item.disableable && rsApp.disable)};" data-bo-href="item.path" data-ng-click="item.action()" data-bo-text="item.title"></a>
+        </li>
+      </ul>
+    </nav>
+  </div> <!-- /app-header -->
+</div><!-- /branding -->
+<div id="subhead">
+  <!--<h1 class="heading heading-page" data-bo-text="header.pageTitle" ng-class="{true: 'invisible'}[loginPage]"></h1>-->
+  <h1 class="heading heading-page" data-ng-bind="header.pageTitle"></h1>
+</div>

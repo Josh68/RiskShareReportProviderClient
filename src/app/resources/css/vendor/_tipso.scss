@@ -1,0 +1,18 @@
+//overrides for Tipso tooltips, also some config in app constants
+
+//tipso.object505.com
+
+.tipso_bubble {
+  @include border-radius (3px);
+  box-shadow: 0 0 10px $warm-brown;
+  padding: 5px 8px 4px 8px;
+}
+.tipso_content {
+  color: $warm-brown;
+}
+.tipso_arrow {
+  
+}
+.tipso_style {
+  border-bottom: 0 none;
+}

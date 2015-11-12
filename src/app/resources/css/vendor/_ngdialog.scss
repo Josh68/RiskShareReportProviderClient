@@ -1,0 +1,36 @@
+//overrides for ngDialog module
+
+.ngdialog {
+  text-align: center;
+  &.ngdialog-theme-plain, &.ngdialog-theme-default {
+    .ngdialog-content { //the whole dialog container (minus the overlay)
+      background-color: #fff;
+      border: 1px solid $dialog-border-color;
+      display: inline-block;
+      font-size: 1em;
+      line-height: 1.2142857143em;
+      padding: 15px 15px 34px; //all values taken from thin modal on mh.com - no other source of confirmation on style
+      text-align: left;
+      width: auto;
+      @include border-radius(15px);
+      .dialog-text {
+        @include font-size($med);
+      }
+      .dialog-text,
+      .dialog-heading {
+        padding-bottom: 10px;
+      }
+    }
+  }
+}
+
+.ngdialog-timeout {
+  .ngdialog-content {
+    width: 420px !important;
+  }
+  .time-placeholder {
+    display: inline-block;
+    width: 40px !important;
+  }
+}
+
